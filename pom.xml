@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>info806</groupId>
-	<artifactId>GestionBD</artifactId>
+	<artifactId>destionBD</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>GestionBD</name>
 	<description>GestionBD project for</description>
