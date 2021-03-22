@@ -24,7 +24,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t gestionBD .
+        run: docker build -t gestion-bd .
 
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
