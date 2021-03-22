@@ -19,7 +19,7 @@
 		<java.version>11</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<sonar.projectKey>info806-GestionBD</sonar.projectKey>
+		<sonar.projectKey>univ-smb-m1-isc-2020_bande-de-hoey</sonar.projectKey>
 		<sonar.organization>univ-smb-m1-isc-2020</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
