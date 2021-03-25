@@ -28,3 +28,13 @@ public class UserController {
         return userService.getAllUser();
     }
 }
+
+@RequestMapping("")
+@RestController
+class test{
+
+    @GetMapping
+    public String test(){
+        return "Hoeeeeeeyyyyyyyyyyyyyyyyy";
+    }
+}
