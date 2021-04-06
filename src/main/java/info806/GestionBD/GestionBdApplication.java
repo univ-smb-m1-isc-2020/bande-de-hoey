@@ -50,7 +50,6 @@ public class GestionBdApplication implements CommandLineRunner{
 		serie.getAlbumes().add(test3);
 
 		serieRepository.save(serie);
-		//System.out.println(serieRepository.findAll().get(0).getAlbumes().get(1).getTitre()+ "yeeeeeees") ;
 
 	}
 }
