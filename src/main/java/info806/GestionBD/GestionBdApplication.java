@@ -4,8 +4,10 @@ import info806.GestionBD.dao.Format;
 import info806.GestionBD.dao.Genre;
 import info806.GestionBD.model.Album;
 import info806.GestionBD.model.Serie;
+import info806.GestionBD.model.Utilisateur;
 import info806.GestionBD.service.repositories.AlbumRepository;
 import info806.GestionBD.service.repositories.SerieRepository;
+import info806.GestionBD.service.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +21,8 @@ public class GestionBdApplication implements CommandLineRunner{
 	private AlbumRepository albumRepository;
 	@Autowired
 	private SerieRepository serieRepository;
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
 
 	public static SerieRepository testS;
 	public static void main(String[] args) {
@@ -50,6 +54,10 @@ public class GestionBdApplication implements CommandLineRunner{
 		serie.getAlbumes().add(test3);
 
 		serieRepository.save(serie);
+
+		Utilisateur u = new Utilisateur("vert", "passieux", "bertrand", "vert@gmail.com", "hoey");
+
+		utilisateurRepository.save(u);
 
 	}
 }

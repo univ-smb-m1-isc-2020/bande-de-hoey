@@ -74,6 +74,8 @@ public class Utilisateur{
         this.mdp = mdp;
     }
 
+    public Utilisateur(){}
+
     public long getId() {
         return id;
     }
@@ -130,5 +132,16 @@ public class Utilisateur{
         this.selections = selections;
     }
 
-
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "id=" + id +
+                ", pseudo='" + pseudo + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", mail='" + mail + '\'' +
+                ", mdp='" + mdp + '\'' +
+                ", selections=" + selections +
+                '}';
+    }
 }
