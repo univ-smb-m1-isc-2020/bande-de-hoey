@@ -68,6 +68,8 @@ public class Serie {
     @JoinColumn(name = "albumes", referencedColumnName = "id")
     List<Album> albumes = new ArrayList<>() ;
 
+    public Serie(){}
+
     public Serie(String etat, String titre, Genre type, int nbAlbum, Format format) {
         this.etat = etat;
         this.titre = titre;

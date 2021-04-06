@@ -11,7 +11,6 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(
         name = "Album",
         uniqueConstraints = {
-                @UniqueConstraint(name ="album_isbn_unique", columnNames = "isbn"),
                 @UniqueConstraint(name ="album_titre_unique", columnNames = "titre")
         }
 )

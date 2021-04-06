@@ -13,10 +13,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
-public class GestionBdApplication{
+public class GestionBdApplication implements CommandLineRunner{
 
+	@Autowired
+	private AlbumRepository albumRepository;
+	@Autowired
+	private SerieRepository serieRepository;
+
+	public static SerieRepository testS;
 	public static void main(String[] args) {
 		SpringApplication.run(GestionBdApplication.class, args);
+		//System.out.println(albumRepository.findAll().get(0));
+		System.out.println("hooey");
 	}
 
 	/*CommandLineRunner commandLineRunner(AlbumRepository albumRepository){
@@ -26,15 +34,8 @@ public class GestionBdApplication{
 		};
 	}*/
 
-	/*@Autowired
-	private AlbumRepository albumRepository;
-	@Autowired
-	private SerieRepository serieRepository;
-
-
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("HOEEEEEY");
 		//test 1
 		Album test = new Album(Genre.Action,12,"test","image", Format.BD,1);
 		albumRepository.save(test);
@@ -42,11 +43,14 @@ public class GestionBdApplication{
 		//test2
 		Album test2 = new Album(Genre.Action,12,"test2","image", Format.BD,1);
 		Album test3 = new Album(Genre.Action,12,"test3","image", Format.BD,1);
+
 		Serie serie =  new Serie("etat", "serie1",Genre.Action,2 ,Format.BD);
 
 		serie.getAlbumes().add(test2);
 		serie.getAlbumes().add(test3);
 
 		serieRepository.save(serie);
-	}*/
+		//System.out.println(serieRepository.findAll().get(0).getAlbumes().get(1).getTitre()+ "yeeeeeees") ;
+
+	}
 }
