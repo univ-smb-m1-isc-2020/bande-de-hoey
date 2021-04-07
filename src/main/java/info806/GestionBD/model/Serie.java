@@ -66,7 +66,7 @@ public class Serie {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "albumes", referencedColumnName = "id")
-    List<Album> albumes = new ArrayList<>() ;
+    private List<Album> albumes = new ArrayList<>() ;
 
     public Serie(){}
 

@@ -5,6 +5,9 @@ import info806.GestionBD.dao.Genre;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Album")
@@ -67,6 +70,14 @@ public class Album {
     )
     private int ordre;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "auteurs", referencedColumnName = "id")
+    private List<Auteur> auteurs = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "serie", referencedColumnName = "id")
+    private Serie serie;
+
     public Album(Genre type, int isbn, String titre, String image, Format format, int ordre) {
         this.type = type;
         this.isbn = isbn;
@@ -126,15 +137,34 @@ public class Album {
         return ordre;
     }
 
+    public List<Auteur> getAuteurs() {
+        return auteurs;
+    }
+
+    public void setAuteurs(List<Auteur> auteurs) {
+        this.auteurs = auteurs;
+    }
+
+    public Serie getSerie() {
+        return serie;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
+
     @Override
     public String toString() {
         return "Album{" +
-                "type=" + type +
+                "id=" + id +
+                ", type=" + type +
                 ", isbn=" + isbn +
                 ", titre='" + titre + '\'' +
                 ", image='" + image + '\'' +
                 ", format=" + format +
                 ", ordre=" + ordre +
+                ", auteurs=" + auteurs +
+                ", serie=" + serie +
                 '}';
     }
 }

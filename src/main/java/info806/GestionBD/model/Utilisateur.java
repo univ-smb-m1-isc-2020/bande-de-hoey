@@ -62,8 +62,16 @@ public class Utilisateur{
     private String mdp;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "selections", referencedColumnName = "id")
-    private List<Selection> selections = new ArrayList<>();
+    @JoinColumn(name = "favoris", referencedColumnName = "id")
+    private List<Favoris> favoris = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "suivis", referencedColumnName = "id")
+    private List<Suivis> suivis = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "collections", referencedColumnName = "id")
+    private List<Collection> collections = new ArrayList<>();
 
 
     public Utilisateur(String pseudo, String nom, String prenom, String mail, String mdp) {
@@ -124,24 +132,27 @@ public class Utilisateur{
         this.mdp = mdp;
     }
 
-    public List<Selection> getSelections() {
-        return selections;
+    public List<Favoris> getFavoris() {
+        return favoris;
     }
 
-    public void setSelections(List<Selection> selections) {
-        this.selections = selections;
+    public void setFavoris(List<Favoris> favoris) {
+        this.favoris = favoris;
     }
 
-    @Override
-    public String toString() {
-        return "Utilisateur{" +
-                "id=" + id +
-                ", pseudo='" + pseudo + '\'' +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", mail='" + mail + '\'' +
-                ", mdp='" + mdp + '\'' +
-                ", selections=" + selections +
-                '}';
+    public List<Suivis> getSuivis() {
+        return suivis;
+    }
+
+    public void setSuivis(List<Suivis> suivis) {
+        this.suivis = suivis;
+    }
+
+    public List<Collection> getCollections() {
+        return collections;
+    }
+
+    public void setCollections(List<Collection> collections) {
+        this.collections = collections;
     }
 }
