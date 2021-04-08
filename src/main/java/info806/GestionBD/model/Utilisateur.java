@@ -155,4 +155,19 @@ public class Utilisateur{
     public void setCollections(List<Collection> collections) {
         this.collections = collections;
     }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "id=" + id +
+                ", pseudo='" + pseudo + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", mail='" + mail + '\'' +
+                ", mdp='" + mdp + '\'' +
+                ", favoris=" + favoris +
+                ", suivis=" + suivis +
+                ", collections=" + collections +
+                '}';
+    }
 }

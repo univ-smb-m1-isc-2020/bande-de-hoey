@@ -46,6 +46,10 @@ public class Auteur {
     @JoinColumn(name = "series", referencedColumnName = "id")
     List<Serie> series = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "albums", referencedColumnName = "id")
+    private List<Album> albums = new ArrayList<>();
+
     public long getId() {
         return id;
     }
@@ -78,8 +82,27 @@ public class Auteur {
         this.series = series;
     }
 
+    public List<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(List<Album> albums) {
+        this.albums = albums;
+    }
+
     public Auteur(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
+    }
+
+    @Override
+    public String toString() {
+        return "Auteur{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", series=" + series +
+                ", albums=" + albums +
+                '}';
     }
 }

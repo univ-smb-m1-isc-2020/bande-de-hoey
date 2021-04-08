@@ -2,6 +2,7 @@ package info806.GestionBD.model;
 
 import info806.GestionBD.dao.Format;
 import info806.GestionBD.dao.Genre;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 
@@ -74,7 +75,7 @@ public class Album {
     @JoinColumn(name = "auteurs", referencedColumnName = "id")
     private List<Auteur> auteurs = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "serie", referencedColumnName = "id")
     private Serie serie;
 
@@ -86,6 +87,7 @@ public class Album {
         this.format = format;
         this.ordre = ordre;
     }
+
 
     public Album(){}
 
@@ -167,6 +169,8 @@ public class Album {
                 ", serie=" + serie +
                 '}';
     }
+
+
 }
 
 

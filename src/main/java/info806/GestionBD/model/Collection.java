@@ -104,4 +104,16 @@ public class Collection {
     public void setAuteurs(List<Auteur> auteurs) {
         this.auteurs = auteurs;
     }
+
+    @Override
+    public String toString() {
+        return "Collection{" +
+                "id=" + id +
+                ", titre='" + titre + '\'' +
+                ", nbSeries=" + nbSeries +
+                ", nbAuteurs=" + nbAuteurs +
+                ", series=" + series +
+                ", auteurs=" + auteurs +
+                '}';
+    }
 }

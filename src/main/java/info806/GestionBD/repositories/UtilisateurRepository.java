@@ -1,4 +1,4 @@
-package info806.GestionBD.service.repositories;
+package info806.GestionBD.repositories;
 
 import info806.GestionBD.model.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;

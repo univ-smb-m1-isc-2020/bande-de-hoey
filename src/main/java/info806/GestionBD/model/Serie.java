@@ -64,7 +64,7 @@ public class Serie {
     )
     private Format format;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "albumes", referencedColumnName = "id")
     private List<Album> albumes = new ArrayList<>() ;
 
