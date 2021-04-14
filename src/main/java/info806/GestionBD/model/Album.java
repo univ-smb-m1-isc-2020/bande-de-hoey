@@ -1,12 +1,10 @@
 package info806.GestionBD.model;
 
-import info806.GestionBD.dao.Format;
-import info806.GestionBD.dao.Genre;
-import org.springframework.context.annotation.Lazy;
-
 import javax.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -40,13 +38,13 @@ public class Album {
             name = "type",
             nullable = false
     )
-    private Genre type;
+    private String type;
 
     @Column(
             name = "isbn",
             nullable = false
     )
-    private int isbn;
+    private String isbn;
 
     @Column(
             name = "titre",
@@ -63,7 +61,7 @@ public class Album {
             name = "format",
             nullable = false
     )
-    private Format format;
+    private String format;
 
     @Column(
             name = "ordre",
@@ -75,11 +73,11 @@ public class Album {
     @JoinColumn(name = "auteurs", referencedColumnName = "id")
     private List<Auteur> auteurs = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "serie", referencedColumnName = "id")
     private Serie serie;
 
-    public Album(Genre type, int isbn, String titre, String image, Format format, int ordre) {
+    public Album(String type, String isbn, String titre, String image, String format, int ordre) {
         this.type = type;
         this.isbn = isbn;
         this.titre = titre;
@@ -91,11 +89,11 @@ public class Album {
 
     public Album(){}
 
-    public void setType(Genre type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -107,7 +105,7 @@ public class Album {
         this.image = image;
     }
 
-    public void setFormat(Format format) {
+    public void setFormat(String format) {
         this.format = format;
     }
 
@@ -115,11 +113,11 @@ public class Album {
         this.ordre = ordre;
     }
 
-    public Genre getType() {
+    public String getType() {
         return type;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
@@ -131,7 +129,7 @@ public class Album {
         return image;
     }
 
-    public Format getFormat() {
+    public String getFormat() {
         return format;
     }
 
@@ -165,12 +163,21 @@ public class Album {
                 ", image='" + image + '\'' +
                 ", format=" + format +
                 ", ordre=" + ordre +
-                ", auteurs=" + auteurs +
+                ", auteurs=" + toStringAuteur(auteurs) +
                 ", serie=" + serie +
                 '}';
     }
 
-
+    public ArrayList<Object> toStringAuteur(List<Auteur> l ){
+        var res = new ArrayList<>();
+        for(Auteur a: l){
+            Dictionary dico = new Hashtable();
+            dico.put("nom", a.getNom());
+            dico.put("prenom", a.getPrenom());
+            res.add(dico);
+        }
+        return res;
+    }
 }
 
 

@@ -1,11 +1,12 @@
 package info806.GestionBD.model;
 
+import info806.GestionBD.dao.Etat;
 import info806.GestionBD.dao.Format;
 import info806.GestionBD.dao.Genre;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.Collection;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -38,7 +39,7 @@ public class Serie {
             name = "etat",
             nullable = false
     )
-    private String etat;
+    private Etat etat;
 
     @Column(
             name = "titre",
@@ -68,9 +69,13 @@ public class Serie {
     @JoinColumn(name = "albumes", referencedColumnName = "id")
     private List<Album> albumes = new ArrayList<>() ;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "auteurs", referencedColumnName = "id")
+    private List<Auteur> auteurs = new ArrayList<>() ;
+
     public Serie(){}
 
-    public Serie(String etat, String titre, Genre type, int nbAlbum, Format format) {
+    public Serie(Etat etat, String titre, Genre type, int nbAlbum, Format format) {
         this.etat = etat;
         this.titre = titre;
         this.type = type;
@@ -78,23 +83,19 @@ public class Serie {
         this.format = format;
     }
 
-    @Override
-    public String toString() {
-        return "Serie{" +
-                "etat='" + etat + '\'' +
-                ", titre='" + titre + '\'' +
-                ", type=" + type +
-                ", nbAlbum=" + nbAlbum +
-                ", format=" + format +
-                ", albumes=" + albumes +
-                '}';
+    public List<Auteur> getAuteurs() {
+        return auteurs;
     }
 
-    public String getEtat() {
+    public void setAuteurs(List<Auteur> auteurs) {
+        this.auteurs = auteurs;
+    }
+
+    public Etat getEtat() {
         return etat;
     }
 
-    public void setEtat(String etat) {
+    public void setEtat(Etat etat) {
         this.etat = etat;
     }
 
@@ -136,5 +137,40 @@ public class Serie {
 
     public void setAlbumes(List<Album> albumes) {
         this.albumes = albumes;
+    }
+
+    @Override
+    public String toString() {
+        return "Serie{" +
+                "id=" + id +
+                ", etat='" + etat + '\'' +
+                ", titre='" + titre + '\'' +
+                ", type=" + type +
+                ", nbAlbum=" + nbAlbum +
+                ", format=" + format +
+                ", albumes=" + toStringAlbum(albumes) +
+                ", auteurs=" + toStringAuteur(auteurs) +
+                '}';
+    }
+
+    public ArrayList<Object> toStringAuteur(List<Auteur> l ){
+        var res = new ArrayList<>();
+        for(Auteur a: l){
+            Dictionary dico = new Hashtable();
+            dico.put("nom", a.getNom());
+            dico.put("prenom", a.getPrenom());
+            res.add(dico);
+        }
+        return res;
+    }
+
+    public ArrayList<Object> toStringAlbum(List<Album> l ){
+        var res = new ArrayList<>();
+        for(Album a: l){
+            Dictionary dico = new Hashtable();
+            dico.put("nom", a.getTitre());
+            res.add(dico);
+        }
+        return res;
     }
 }

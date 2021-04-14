@@ -1,10 +1,13 @@
 package info806.GestionBD.api;
 
+import info806.GestionBD.model.Album;
+import info806.GestionBD.model.Auteur;
+import info806.GestionBD.model.Serie;
 import info806.GestionBD.service.AuteurService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RequestMapping("auteur")
 @RestController
@@ -18,7 +21,38 @@ public class AuteurController {
     }
 
     @GetMapping
+    @RequestMapping("all")
     public String getAllAuteurs(){
         return auteurService.getAllAuteurs().toString();
+    }
+
+    @GetMapping
+    @RequestMapping("byAlbum")
+    public String getByAlbum(@RequestBody String titre){
+        return auteurService.getByAlbum(titre).toString();
+    }
+
+    @PostMapping(path = "create")
+    public void create(){
+        Auteur au1 = new Auteur("clerc", "greg");
+        Auteur au2 = new Auteur("hoey", "rob");
+        var listAuteur = new ArrayList<Auteur>();
+        listAuteur.add(au1);
+        listAuteur.add(au2);
+        auteurService.create(listAuteur);
+    }
+
+    @GetMapping("byName")
+    public Auteur getByName(String nom){
+        return auteurService.getByName(nom);
+    }
+
+    @PostMapping(path = "addAlbum")
+    public void addAlbum(String nom, Album album){
+        auteurService.addAlbum(nom, album);
+    }
+
+    public void addSerie(String clerc, Serie serie1) {
+        auteurService.addSerie(clerc, serie1);
     }
 }

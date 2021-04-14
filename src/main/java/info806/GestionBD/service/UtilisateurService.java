@@ -6,6 +6,7 @@ import info806.GestionBD.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,5 +21,9 @@ public class UtilisateurService {
 
     public List<Utilisateur> getAllUsers(){
         return utilisateurRepository.findAll();
+    }
+
+    public void create(ArrayList<Utilisateur> listUtilisateur) {
+        utilisateurRepository.saveAll(listUtilisateur);
     }
 }

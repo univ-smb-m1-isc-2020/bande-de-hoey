@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -46,7 +48,7 @@ public class Auteur {
     @JoinColumn(name = "series", referencedColumnName = "id")
     List<Serie> series = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "albums", referencedColumnName = "id")
     private List<Album> albums = new ArrayList<>();
 
@@ -95,14 +97,37 @@ public class Auteur {
         this.prenom = prenom;
     }
 
+    public Auteur() {
+    }
+
     @Override
     public String toString() {
         return "Auteur{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
-                ", series=" + series +
-                ", albums=" + albums +
+                ", series=" + toStringSerie(series) +
+                ", albums=" + toStringAlbum(albums) +
                 '}';
+    }
+
+    public ArrayList<Object> toStringAlbum(List<Album> l ){
+        var res = new ArrayList<>();
+        for(Album a: l){
+            Dictionary dico = new Hashtable();
+            dico.put("titre", a.getTitre());
+            res.add(dico);
+        }
+        return res;
+    }
+
+    public ArrayList<Object> toStringSerie(List<Serie> l ){
+        var res = new ArrayList<>();
+        for(Serie s: l){
+            Dictionary dico = new Hashtable();
+            dico.put("titre", s.getTitre());
+            res.add(dico);
+        }
+        return res;
     }
 }
