@@ -1,6 +1,7 @@
 package info806.GestionBD.api;
 
 
+import info806.GestionBD.model.Utilisateur;
 import info806.GestionBD.service.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,9 @@ public class CollectionController {
         this.collectionService = collectionService;
     }
 
-    @GetMapping
+    @GetMapping(path = "all")
     public String getAllCollections(){
         return collectionService.getAllCollections().toString();
     }
+
 }

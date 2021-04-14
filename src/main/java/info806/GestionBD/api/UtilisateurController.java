@@ -3,10 +3,7 @@ package info806.GestionBD.api;
 import info806.GestionBD.model.Utilisateur;
 import info806.GestionBD.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -20,11 +17,35 @@ public class UtilisateurController {
     public UtilisateurController(UtilisateurService utilisateurService) {
         this.utilisateurService = utilisateurService;
     }
+
+    // Get
+
     @GetMapping(path = "all")
     public String getAllUsers(){
         return utilisateurService.getAllUsers().toString();
     }
 
+    @GetMapping(path = "byName")
+    public String getByName(@RequestBody String name){
+        return utilisateurService.getByName(name).toString();
+    }
+
+    @GetMapping(path = "byPseudo")
+    public String getByPseudo(@RequestBody String pseudo){
+        return utilisateurService.getByPseudo(pseudo).toString();
+    }
+
+    @GetMapping(path = "byMail")
+    public String getByMail(@RequestBody String mail){
+        return utilisateurService.getByMail(mail).toString();
+    }
+
+    @GetMapping(path = "login")
+    public boolean login(String mail, String mdp){
+        return utilisateurService.login(mail,mdp);
+    }
+
+    // Post
     @PostMapping(path = "create")
     public void create(){
         Utilisateur u = new Utilisateur("vert", "passieux", "bertrand", "vert@gmail.com", "hoey");
@@ -35,6 +56,11 @@ public class UtilisateurController {
         listUtilisateur.add(u2);
         listUtilisateur.add(u3);
         utilisateurService.create(listUtilisateur);
+    }
+
+    @PostMapping(path = "inscreption")
+    public void inscreption(Utilisateur user){
+        utilisateurService.inscreption(user);
     }
 
 }

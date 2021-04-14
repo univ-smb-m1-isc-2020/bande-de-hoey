@@ -1,6 +1,7 @@
 package info806.GestionBD.service;
 
 import info806.GestionBD.model.Collection;
+import info806.GestionBD.model.Utilisateur;
 import info806.GestionBD.repositories.CollectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -51,8 +51,8 @@ public class AlbumController {
 
     @RequestMapping("byAuteur")
     @GetMapping
-    public String getByAuteur(@RequestBody String nom) {
-        return albumService.getByAuteur(nom).toString();
+    public String getByAuteur(@RequestBody Auteur auteur) {
+        return albumService.getByAuteur(auteur).toString();
     }
 
     @RequestMapping("bySerie")

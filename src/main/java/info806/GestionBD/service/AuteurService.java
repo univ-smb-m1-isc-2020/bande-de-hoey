@@ -27,7 +27,6 @@ public class AuteurService {
     public List<Auteur> getByAlbum(String titre) {
         var auteurs = getAllAuteurs();
         var res = new ArrayList<Auteur>();
-        System.out.println(auteurs);
         for (int i = 0; i<auteurs.size(); i++) {
             var albums = auteurs.get(i).getAlbums();
             for (int j = 0; j<albums.size(); j++) {
@@ -48,6 +47,21 @@ public class AuteurService {
         };
         return null;
     }
+
+    public List<Auteur> getBySerie(String title) {
+        var auteurs = getAllAuteurs();
+        var res = new ArrayList<Auteur>();
+        for (int i = 0; i<auteurs.size(); i++) {
+            var series = auteurs.get(i).getSeries();
+            for (int j = 0; j<series.size(); j++) {
+                if(series.get(j).getTitre().matches(title)){
+                    res.add(auteurs.get(i));
+                }
+            }
+        }
+        return res;
+    }
+
     public void create(List<Auteur> list) {
         auteurRepository.saveAll(list);
     }

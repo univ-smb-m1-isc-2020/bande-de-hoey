@@ -49,13 +49,13 @@ public class AlbumService {
         return null;
     }
 
-    public List<Album> getByAuteur(String nom) {
+    public List<Album> getByAuteur(Auteur auteur) {
         var albums = getAllAlbums();
         var res = new ArrayList<Album>();
         for (int i = 0; i<albums.size(); i++) {
             var auteurs = albums.get(i).getAuteurs();
-            for (Auteur auteur: auteurs){
-                if (auteur.getNom().matches(nom)){
+            for (Auteur a: auteurs){
+                if (a.getNom().matches(auteur.getNom()) && a.getPrenom().matches(auteur.getPrenom())){
                     res.add(albums.get(i));
                 }
             }

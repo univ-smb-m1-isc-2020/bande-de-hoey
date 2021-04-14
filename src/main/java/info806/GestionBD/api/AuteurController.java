@@ -20,19 +20,28 @@ public class AuteurController {
         this.auteurService = auteurService;
     }
 
-    @GetMapping
-    @RequestMapping("all")
+    // Get
+    @GetMapping(path = "all")
     public String getAllAuteurs(){
         return auteurService.getAllAuteurs().toString();
     }
 
-    @GetMapping
-    @RequestMapping("byAlbum")
+    @GetMapping("byName")
+    public Auteur getByName(String nom){
+        return auteurService.getByName(nom);
+    }
+
+    @GetMapping(path = "byAlbum")
     public String getByAlbum(@RequestBody String titre){
         return auteurService.getByAlbum(titre).toString();
     }
 
-    @PostMapping(path = "create")
+    @GetMapping(path = "bySerie")
+    public String getBySerie(@RequestBody String title){
+        return auteurService.getBySerie(title).toString();
+    }
+
+    // Post
     public void create(){
         Auteur au1 = new Auteur("clerc", "greg");
         Auteur au2 = new Auteur("hoey", "rob");
@@ -40,11 +49,6 @@ public class AuteurController {
         listAuteur.add(au1);
         listAuteur.add(au2);
         auteurService.create(listAuteur);
-    }
-
-    @GetMapping("byName")
-    public Auteur getByName(String nom){
-        return auteurService.getByName(nom);
     }
 
     @PostMapping(path = "addAlbum")
