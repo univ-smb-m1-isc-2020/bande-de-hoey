@@ -55,7 +55,6 @@ class AlbumControllerTest {
                 assertFalse(true, "test getAllAlbums failed");
             }
         }
-        assertTrue(true, "test getAllAlbums succeed");
     }
 
     @Test

@@ -46,7 +46,6 @@ class AuteurControllerTest {
                 assertFalse(true, "test getAllAuteurs failed");
             }
         }
-        assertTrue(true, "test getAllAuteurs succeed");
     }
 
     @Test

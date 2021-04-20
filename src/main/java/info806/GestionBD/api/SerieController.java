@@ -25,8 +25,8 @@ public class SerieController {
     }
 
     @GetMapping(path = "all")
-    public String getAllSeries(){
-        return serieService.getAllSeries().toString();
+    public List<Serie> getAllSeries(){
+        return serieService.getAllSeries();
     }
 
     @PostMapping(path = "create")
@@ -48,23 +48,23 @@ public class SerieController {
     }
 
     @GetMapping(path = "byType")
-    public String getByType(@RequestBody String type){
-        return serieService.getByType(type).toString();
+    public List<Serie> getByType(@RequestBody String type){
+        return serieService.getByType(type);
     }
 
     @GetMapping(path = "byFormat")
-    public String getByFormat(@RequestBody String format){
-        return serieService.getByFormat(format).toString();
+    public List<Serie> getByFormat(@RequestBody String format){
+        return serieService.getByFormat(format);
     }
 
     @GetMapping(path = "byEtat")
-    public String getByEtat(@RequestBody String etat){
-        return serieService.getByEtat(etat).toString();
+    public List<Serie> getByEtat(@RequestBody String etat){
+        return serieService.getByEtat(etat);
     }
 
     @GetMapping(path = "byAuteur")
-    public String getByAuteur(@RequestBody Auteur auteur){
-        return serieService.getByAuteur(auteur).toString();
+    public List<Serie> getByAuteur(@RequestBody Auteur auteur){
+        return serieService.getByAuteur(auteur);
     }
 
     //Post

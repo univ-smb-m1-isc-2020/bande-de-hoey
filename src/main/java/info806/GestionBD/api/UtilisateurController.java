@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping("utilisateur")
 @RestController
@@ -21,23 +22,23 @@ public class UtilisateurController {
     // Get
 
     @GetMapping(path = "all")
-    public String getAllUsers(){
-        return utilisateurService.getAllUsers().toString();
+    public List<Utilisateur> getAllUsers(){
+        return utilisateurService.getAllUsers();
     }
 
     @GetMapping(path = "byName")
-    public String getByName(@RequestBody String name){
-        return utilisateurService.getByName(name).toString();
+    public List<Utilisateur> getByName(@RequestBody String name){
+        return utilisateurService.getByName(name);
     }
 
     @GetMapping(path = "byPseudo")
-    public String getByPseudo(@RequestBody String pseudo){
-        return utilisateurService.getByPseudo(pseudo).toString();
+    public List<Utilisateur> getByPseudo(@RequestBody String pseudo){
+        return utilisateurService.getByPseudo(pseudo);
     }
 
     @GetMapping(path = "byMail")
-    public String getByMail(@RequestBody String mail){
-        return utilisateurService.getByMail(mail).toString();
+    public Utilisateur getByMail(@RequestBody String mail){
+        return utilisateurService.getByMail(mail);
     }
 
     @GetMapping(path = "login")

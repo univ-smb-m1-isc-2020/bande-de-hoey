@@ -70,7 +70,7 @@ public class GestionBdApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		//Create
-		/*albumController.create();
+		albumController.create();
 		auteurController.create();
 		serieController.create();
 		utilisateurController.create();
@@ -78,17 +78,17 @@ public class GestionBdApplication implements CommandLineRunner{
 		//Add
 		var auteur = auteurController.getByName("clerc");
 
-		var album1 = albumController.getByTitle("album1");
-		var	album2 = albumController.getByTitle("album2");
+		var album1 = albumController.getByTitle("hoey1");
+		var	album2 = albumController.getByTitle("hoey2");
 
 		var serie1 = serieController.getByTitle("serie1");
 		var serie2 = serieController.getByTitle("serie2");
 
-		albumController.addAuther("album1",auteur);
-		albumController.addAuther("album2",auteur);
+		albumController.addAuther("hoey1",auteur);
+		albumController.addAuther("hoey2",auteur);
 
 		//doesn't work
-		albumController.addSerie("album1",serie1);
+		albumController.addSerie("hoey1",serie1);
 
 
 		auteurController.addAlbum("clerc",album1);
@@ -99,7 +99,7 @@ public class GestionBdApplication implements CommandLineRunner{
 		auteurController.addSerie("clerc", serie2);
 
 		serieController.addAuteur("serie1", auteur );
-		serieController.addAlbum("serie1", album1);*/
+		serieController.addAlbum("serie1", album1);
 
 
 
