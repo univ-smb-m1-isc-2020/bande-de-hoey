@@ -6,6 +6,8 @@ import info806.GestionBD.model.Auteur;
 import info806.GestionBD.model.Serie;
 import info806.GestionBD.repositories.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,13 +16,21 @@ import java.util.List;
 @Service
 public class AlbumService {
 
-    private final AlbumRepository albumRepository;
+
+    private AlbumRepository albumRepository;
+
 
     @Autowired
     public AlbumService(AlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
     }
 
+    public AlbumService(){}
+
+    public String test(){
+        return "hello";
+    }
+    //public AlbumService(){}
     public List<Album> getAllAlbums(){
         return albumRepository.findAll();
     }
@@ -28,6 +38,7 @@ public class AlbumService {
     public Album getById(Long id){
         return albumRepository.findById(id).get();
     }
+
 
     public Album getByTitle(String title){
         var albums = getAllAlbums();

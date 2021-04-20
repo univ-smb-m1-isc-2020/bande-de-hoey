@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping("auteur")
 @RestController
@@ -22,8 +23,8 @@ public class AuteurController {
 
     // Get
     @GetMapping(path = "all")
-    public String getAllAuteurs(){
-        return auteurService.getAllAuteurs().toString();
+    public List<Auteur> getAllAuteurs(){
+        return auteurService.getAllAuteurs();
     }
 
     @GetMapping("byName")
@@ -32,13 +33,13 @@ public class AuteurController {
     }
 
     @GetMapping(path = "byAlbum")
-    public String getByAlbum(@RequestBody String titre){
-        return auteurService.getByAlbum(titre).toString();
+    public List<Auteur> getByAlbum(@RequestBody String titre){
+        return auteurService.getByAlbum(titre);
     }
 
     @GetMapping(path = "bySerie")
-    public String getBySerie(@RequestBody String title){
-        return auteurService.getBySerie(title).toString();
+    public List<Auteur> getBySerie(@RequestBody String title){
+        return auteurService.getBySerie(title);
     }
 
     // Post

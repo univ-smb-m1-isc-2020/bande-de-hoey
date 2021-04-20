@@ -19,11 +19,17 @@ import info806.GestionBD.service.AuteurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/*@ComponentScan({"info806.GestionBD.api", "info806.GestionBD.repositories"})
+@EnableJpaRepositories("info806.GestionBD.repositories")*/
 @SpringBootApplication
 public class GestionBdApplication implements CommandLineRunner{
 
@@ -64,7 +70,7 @@ public class GestionBdApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		//Create
-		albumController.create();
+		/*albumController.create();
 		auteurController.create();
 		serieController.create();
 		utilisateurController.create();
@@ -93,7 +99,7 @@ public class GestionBdApplication implements CommandLineRunner{
 		auteurController.addSerie("clerc", serie2);
 
 		serieController.addAuteur("serie1", auteur );
-		serieController.addAlbum("serie1", album1);
+		serieController.addAlbum("serie1", album1);*/
 
 
 

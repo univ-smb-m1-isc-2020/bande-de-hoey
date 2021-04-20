@@ -9,10 +9,12 @@ import info806.GestionBD.model.Serie;
 import info806.GestionBD.model.Utilisateur;
 import info806.GestionBD.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping("album")
 @RestController
@@ -27,14 +29,14 @@ public class AlbumController {
 
     @RequestMapping("all")
     @GetMapping
-    public String getAllAlbums() {
-        return albumService.getAllAlbums().toString();
+    public List<Album> getAllAlbums() {
+        return albumService.getAllAlbums();
     }
 
     @RequestMapping("byId")
     @GetMapping
-    public String getById(@RequestBody Long id) {
-        return albumService.getById(id).toString();
+    public Album getById(@RequestBody Long id) {
+        return albumService.getById(id);
     }
 
     @RequestMapping("byTitle")
@@ -45,20 +47,20 @@ public class AlbumController {
 
     @RequestMapping("byISBN")
     @GetMapping
-    public String getByISBN(@RequestBody String isbn) {
-        return albumService.getByISBN(isbn).toString();
+    public Album getByISBN(@RequestBody String isbn) {
+        return albumService.getByISBN(isbn);
     }
 
     @RequestMapping("byAuteur")
     @GetMapping
-    public String getByAuteur(@RequestBody Auteur auteur) {
-        return albumService.getByAuteur(auteur).toString();
+    public List<Album> getByAuteur(@RequestBody Auteur auteur) {
+        return albumService.getByAuteur(auteur);
     }
 
     @RequestMapping("bySerie")
     @GetMapping
-    public String getBySerie(@RequestBody String title) {
-        return albumService.getBySerie(title).toString();
+    public List<Album> getBySerie(@RequestBody String title) {
+        return albumService.getBySerie(title);
     }
 
     // POST
@@ -71,9 +73,9 @@ public class AlbumController {
 
     @PostMapping(path = "create")
     public void create(){
-        Album album1 = new Album("Action","12","album1","image", "BD",1);
-        Album album2 = new Album("Action","13","album2","image", "BD",2);
-        Album album3 = new Album("Comedie","14","album3","image", "BD",3);
+        Album album1 = new Album("Action","12","hoey1","image", "BD",1);
+        Album album2 = new Album("Action","13","hoey2","image", "BD",2);
+        Album album3 = new Album("Comedie","14","hoey3","image", "BD",3);
         var listAlbum = new ArrayList<Album>();
         listAlbum.add(album1);
         listAlbum.add(album2);
@@ -89,6 +91,5 @@ public class AlbumController {
     public void addSerie(String title, Serie serie){
         albumService.addSerie(title, serie);
     }
-
 
 }

@@ -1,5 +1,8 @@
 package info806.GestionBD.model;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
 import java.util.ArrayList;
@@ -9,6 +12,8 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
+@Component
+@Primary
 @Entity(name = "Album")
 @Table(
         name = "Album",
