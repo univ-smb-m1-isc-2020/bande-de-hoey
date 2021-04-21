@@ -1,5 +1,6 @@
 package info806.GestionBD.api;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import info806.GestionBD.model.Utilisateur;
 import info806.GestionBD.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +60,9 @@ public class UtilisateurController {
         utilisateurService.create(listUtilisateur);
     }
 
-    @PostMapping(path = "inscreption")
-    public void inscreption(Utilisateur user){
+    @PostMapping(path = "inscription")
+    public void inscreption(@RequestBody Utilisateur user){
+        System.out.println("************************************************" + user.toString() + "*****************************************");
         utilisateurService.inscreption(user);
     }
 

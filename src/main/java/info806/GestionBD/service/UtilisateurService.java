@@ -61,6 +61,7 @@ public class UtilisateurService {
     }
 
     public void inscreption(Utilisateur user) {
+        System.out.println(user.toString());
         utilisateurRepository.save(user);
     }
 
