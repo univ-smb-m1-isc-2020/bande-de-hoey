@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inscription</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/inscription.css" />
+</head>
+<body>
+<div class="loginBox">
+    <img src = "../../img/avatar.jpg" class="avatar">
+    <h1>Inscription</h1>
+    <form name='f' action="perform_login" method='POST'>
+        <div class="gauche">
+            <p>Nom:</p>
+            <input type='text' name='lastname' placeholder="Entrez votre nom" id="nom"/>
+
+            <p>Prénom:</p>
+            <input type='text' name='firstname' placeholder="Entrez votre prénom" id="prenom"/>
+
+            <p>Utilisateur:</p>
+            <input type='text' name='username' placeholder="Entrez un pseudo" id="pseudo"/>
+        </div>
+        <div class="droite">
+            <p>Adresse Mail:</p>
+            <input type='mail' name='email' placeholder="Entrez votre adresse mail" id="mail"/>
+
+            <p>Mot de passe:</p>
+            <input type='password' name='password' placeholder="Entrez votre mot de passe" id="mdp"/>
+
+            <p>Répétez votre Mot de passe:</p>
+            <input type='password' name='password' placeholder="Répétez votre mot de passe" id="mdp2"/>
+        </div>
+        <input type="submit" name="submit"  value="Validez" onclick="getValuePseudo();" href="home.html"/>
+        <script src="../static/javascript/getElementUtilisateur.js"></script>
+        </script>
+    </form>
+</div>
+</body>
+</html>
