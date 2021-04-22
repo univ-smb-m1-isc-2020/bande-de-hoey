@@ -76,7 +76,7 @@ public class GestionBdApplication implements CommandLineRunner{
 		utilisateurController.create();
 
 		//Add
-		var auteur = auteurController.getByName("clerc");
+		/*var auteur = auteurController.getByName("clerc");
 
 		var album1 = albumController.getByTitle("hoey1");
 		var	album2 = albumController.getByTitle("hoey2");
@@ -99,7 +99,7 @@ public class GestionBdApplication implements CommandLineRunner{
 		auteurController.addSerie("clerc", serie2);
 
 		serieController.addAuteur("serie1", auteur );
-		serieController.addAlbum("serie1", album1);
+		serieController.addAlbum("serie1", album1);*/
 
 
 

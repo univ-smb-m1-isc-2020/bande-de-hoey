@@ -61,7 +61,6 @@ public class UtilisateurService {
     }
 
     public void inscreption(Utilisateur user) {
-        System.out.println(user.toString());
         utilisateurRepository.save(user);
     }
 
@@ -72,5 +71,13 @@ public class UtilisateurService {
             res = user.getMdp().matches(mdp);
         }
         return res;
+    }
+
+    public void delete(Utilisateur user){
+        try{
+            utilisateurRepository.delete(user);
+        }catch (Exception e){
+            System.out.println("Exception : "+e);
+        }
     }
 }

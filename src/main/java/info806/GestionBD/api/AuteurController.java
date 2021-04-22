@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("auteur")
 @RestController
 public class AuteurController {
@@ -28,17 +29,17 @@ public class AuteurController {
     }
 
     @GetMapping("byName")
-    public Auteur getByName(String nom){
+    public Auteur getByName(@RequestParam(value = "name")String nom){
         return auteurService.getByName(nom);
     }
 
     @GetMapping(path = "byAlbum")
-    public List<Auteur> getByAlbum(@RequestBody String titre){
+    public List<Auteur> getByAlbum(@RequestParam(value = "album") String titre){
         return auteurService.getByAlbum(titre);
     }
 
     @GetMapping(path = "bySerie")
-    public List<Auteur> getBySerie(@RequestBody String title){
+    public List<Auteur> getBySerie(@RequestParam(value = "serie")String title){
         return auteurService.getBySerie(title);
     }
 

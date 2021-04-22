@@ -1,7 +1,5 @@
 package info806.GestionBD.api;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import info806.GestionBD.model.Utilisateur;
 import info806.GestionBD.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +46,6 @@ public class UtilisateurController {
 
     @GetMapping(path = "login")
     public boolean login(@RequestParam(value = "mail") String mail,@RequestParam(value = "mdp") String mdp){
-        System.out.println("mail and mdp : "+ mail +" "+ mdp );
         return utilisateurService.login(mail,mdp);
     }
 
@@ -69,6 +66,12 @@ public class UtilisateurController {
     @RequestMapping(method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE, path = "inscription")
     public void inscreption(@RequestBody Utilisateur user){
         utilisateurService.inscreption(user);
+    }
+
+    @DeleteMapping(path = "delete")
+    public void delete(@RequestBody Utilisateur user){
+        System.out.println(user.toString());
+        utilisateurService.delete(user);
     }
 
 }

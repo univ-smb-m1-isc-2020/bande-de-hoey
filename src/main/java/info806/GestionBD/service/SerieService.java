@@ -98,13 +98,13 @@ public class SerieService {
         return res;
     }
 
-    public List<Serie> getByAuteur(Auteur auteur) {
+    public List<Serie> getByAuteur(String nom) {
         var series = getAllSeries();
         var res = new ArrayList<Serie>();
         for (int i = 0; i<series.size(); i++) {
             var auteurs = series.get(i).getAuteurs();
             for (Auteur a: auteurs){
-                if (a.getNom().matches(auteur.getNom()) && a.getPrenom().matches(auteur.getPrenom())){
+                if (a.getNom().matches(nom)){
                     res.add(series.get(i));
                 }
             }

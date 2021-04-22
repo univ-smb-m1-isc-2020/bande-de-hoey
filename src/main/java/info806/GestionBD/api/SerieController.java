@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("serie")
 @RestController
 public class SerieController {
@@ -43,27 +44,27 @@ public class SerieController {
 
     // Get
     @GetMapping(path = "byTitle")
-    public Serie getByTitle(@RequestBody String title) {
+    public Serie getByTitle(@RequestParam(value = "title") String title) {
         return serieService.getByTitle(title);
     }
 
     @GetMapping(path = "byType")
-    public List<Serie> getByType(@RequestBody String type){
+    public List<Serie> getByType(@RequestParam(value = "type") String type){
         return serieService.getByType(type);
     }
 
     @GetMapping(path = "byFormat")
-    public List<Serie> getByFormat(@RequestBody String format){
+    public List<Serie> getByFormat(@RequestParam(value = "format") String format){
         return serieService.getByFormat(format);
     }
 
     @GetMapping(path = "byEtat")
-    public List<Serie> getByEtat(@RequestBody String etat){
+    public List<Serie> getByEtat(@RequestParam(value = "etat") String etat){
         return serieService.getByEtat(etat);
     }
 
     @GetMapping(path = "byAuteur")
-    public List<Serie> getByAuteur(@RequestBody Auteur auteur){
+    public List<Serie> getByAuteur(@RequestParam(value = "auteur") String auteur){
         return serieService.getByAuteur(auteur);
     }
 

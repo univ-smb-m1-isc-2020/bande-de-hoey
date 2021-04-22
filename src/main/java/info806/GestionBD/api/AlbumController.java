@@ -16,6 +16,7 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("album")
 @RestController
 public class AlbumController {
@@ -39,32 +40,28 @@ public class AlbumController {
         return albumService.getById(id);
     }
 
-    @RequestMapping("byTitle")
-    @GetMapping
-    public Album getByTitle(@RequestBody String title) {
+
+    @GetMapping(path = "byTitle")
+    public Album getByTitle(@RequestParam(value = "title") String title) {
         return albumService.getByTitle(title);
     }
 
-    @RequestMapping("byISBN")
-    @GetMapping
-    public Album getByISBN(@RequestBody String isbn) {
+    @GetMapping(path = "byISBN")
+    public Album getByISBN(@RequestParam(value = "isbn") String isbn) {
         return albumService.getByISBN(isbn);
     }
 
-    @RequestMapping("byAuteur")
-    @GetMapping
-    public List<Album> getByAuteur(@RequestBody Auteur auteur) {
+    @GetMapping(path = "byAuteur")
+    public List<Album> getByAuteur(@RequestParam(value = "auteur") String auteur) {
         return albumService.getByAuteur(auteur);
     }
 
-    @RequestMapping("bySerie")
-    @GetMapping
-    public List<Album> getBySerie(@RequestBody String title) {
+    @GetMapping(path ="bySerie" )
+    public List<Album> getBySerie(@RequestParam(value = "serie") String title) {
         return albumService.getBySerie(title);
     }
 
     // POST
-
     @PostMapping(path = "add")
     public void addAlbum2(@RequestBody Album album){
         System.out.println(album + "yeeeees");
@@ -81,6 +78,11 @@ public class AlbumController {
         listAlbum.add(album2);
         listAlbum.add(album3);
         albumService.create(listAlbum);
+    }
+
+    @PostMapping(path = "createBertrand")
+    public void createBertrand(Album album){
+        albumService.createBertrand(album);
     }
 
     public void addAuther(String title, Auteur auteur){

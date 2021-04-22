@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Serie</title>
+    <title>Bande De Hoey</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../static/css/header.css" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="../static/javascript/serie.js"></script>
+    <script>
+        $(function(){
+            $("#header").load("header.html");
+        });
+    </script>
+</head>
+<body>
+    <div id="header"></div>
+    <label for="serie-select">Recherche par :</label>
+    <select name="album" id="serie-select">
+        <option value="title">by title</option>
+        <option value="type">by type</option>
+        <option value="etat">by etat</option>
+        <option value="format">by format</option>
+        <option value="auteur">by auteur</option>
+    </select>
+
+    <div>
+        <input type="search" id="serie-search" name="search" placeholder="Recherche...">
+        <input type="submit" name="submit"  value="Validez" onclick="serie();"/>
+    </div>
+</body>
+</html>

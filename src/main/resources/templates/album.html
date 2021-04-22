@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>album</title>
+    <title>Bande De Hoey</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../static/css/header.css" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="../static/javascript/album.js"></script>
+    <script>
+        $(function(){
+            $("#header").load("header.html");
+        });
+    </script>
+</head>
+<body>
+<div id="header"></div>
+<div>
+    <label for="album-select">Recherche par :</label>
+    <select name="album" id="album-select">
+        <option value="title">by title</option>
+        <option value="auteur">by auteur's name</option>
+        <option value="serie">by serie</option>
+        <option value="isbn">by ISBN</option>
+    </select>
+</div>
+<div>
+    <input type="search" id="id-search" name="search" placeholder="Recherche...">
+    <input type="submit" name="submit"  value="Validez" onclick="albums();"/>
+</div>
+
+
+</body>
+</html>
