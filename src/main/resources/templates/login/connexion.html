@@ -4,23 +4,21 @@
     <title>Connexion</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/connexion.css" />
+    <script src="../../static/javascript/loginUtilisateur.js"></script>
 </head>
 <body>
     <div class="loginBox">
     <img src = "../../img/avatar.jpg" class="avatar">
     <h1>Connexion</h1>
-    <form name='f' action="perform_login" method='POST'>
         <p>Utilisateur:</p>
-        <input type='text' name='username' placeholder="Entrez votre nom d'utilisateur" id="pseudo"/>
+        <input type='text' name='mail' placeholder="Entrez votre mail" id="mail"/>
 
         <p>Mot de passe:</p>
         <input type='password' name='password' placeholder="Entrez votre mot de passe" id="mdp"/>
 
-        <input type="submit" name="submit"  value="Validez" onclick="getValuePseudo();" href="home.html"/>
+        <input type="submit" name="submit"  value="Validez" onclick="connexion();"/>
         <a href ="inscription.html">Pas de compte ?</a><br>
-        <script src="../../static/javascript/getElementUtilisateur.js"></script>
         </script>
-    </form>
     </div>
 </body>
 </html>

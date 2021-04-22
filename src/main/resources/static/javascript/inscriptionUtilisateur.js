@@ -1,3 +1,4 @@
+
 function getValueLastName() {
     var input = document.getElementById("nom").value;
     alert(input);
@@ -35,25 +36,25 @@ function sendValueToJava() {
     if( mdp != mdp2){
         alert("invalid")
     }else{
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
 
+        var body = JSON.stringify({
+                "nom":nom,
+                "prenom":prenom,
+                "mail":mail,
+                "pseudo":pseudo,
+                "mdp":mdp});
 
         fetch("http://localhost:8080/utilisateur/inscription", {
-            method: 'post',
-            body: JSON.stringify({
-                nom: "nom",
-                prenom: "prenom",
-                pseudo: "pseudo",
-                mail: "mail",
-                mdp: "mdp"
-            }),
-            headers:{
-                'Accept': 'application/json, text/plain, *!/!*',
-                "Content-type":"application/json; charset=UTF-8"
-            }
+            method: 'POST',
+            headers: myHeaders,
+            body: body,
+            redirect: 'follow',
         })
-            .then(res => res.json())
-            .then(res => console.log(res))
-
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
     }
 
 }

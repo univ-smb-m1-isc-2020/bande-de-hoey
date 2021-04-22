@@ -4,12 +4,13 @@
     <title>Inscription</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/inscription.css" />
+    <script src="../../static/javascript/inscriptionUtilisateur.js"></script>
+
 </head>
 <body>
 <div class="loginBox">
     <img src = "../../img/avatar.jpg" class="avatar">
     <h1>Inscription</h1>
-    <form name='f' method='POST'>
         <div class="gauche">
             <p>Nom:</p>
             <input type='text' name='lastname' placeholder="Entrez votre nom" id="nom"/>
@@ -30,10 +31,7 @@
             <p>Répétez votre Mot de passe:</p>
             <input type='password' name='password' placeholder="Répétez votre mot de passe" id="mdp2"/>
         </div>
-        <input type="submit" name="submit"  value="Validez" onclick="sendValueToJava();" href="../home.html"/>
-        <script src="../../static/javascript/getElementUtilisateur.js"></script>
-        </script>
-    </form>
+        <input type="submit" name="submit"  value="Validez" onclick="sendValueToJava();"/>
 </div>
 </body>
 </html>
