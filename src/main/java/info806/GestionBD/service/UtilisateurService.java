@@ -2,6 +2,8 @@ package info806.GestionBD.service;
 
 
 import info806.GestionBD.model.Album;
+import info806.GestionBD.model.Favoris;
+import info806.GestionBD.model.Serie;
 import info806.GestionBD.model.Utilisateur;
 import info806.GestionBD.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +72,12 @@ public class UtilisateurService {
         if(user != null){
             res = user.getMdp().matches(mdp);
         }
+        Utilisateur.setConnectedUser(user);
         return res;
+    }
+
+    public Utilisateur getConnectedUser(){
+        return Utilisateur.getConnectedUser();
     }
 
     public void delete(Utilisateur user){
@@ -79,5 +86,20 @@ public class UtilisateurService {
         }catch (Exception e){
             System.out.println("Exception : "+e);
         }
+    }
+
+    public void addSerieToFavoris(Serie serie) {
+        System.out.println("********************************* started *******************************");
+        if(Utilisateur.getConnectedUser().getFavoris() == null){
+            Favoris f = new Favoris(null,0,0,0);
+            var u =Utilisateur.getConnectedUser();
+            u.setFavoris(f);
+            Utilisateur.setConnectedUser(u);
+            System.out.println("********************************* yes *******************************");
+        }else{
+            System.out.println("********************************* non *******************************");
+        }
+        Utilisateur.getConnectedUser().getFavoris().getSeries().add(serie);
+        utilisateurRepository.save(Utilisateur.getConnectedUser());
     }
 }

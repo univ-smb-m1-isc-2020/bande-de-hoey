@@ -8,10 +8,10 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Favoris")
 @Table(
-        name = "Favoris",
-        uniqueConstraints = {
-                @UniqueConstraint(name ="favoris_titre_unique", columnNames = "titre")
-        }
+        name = "Favoris"
+        /*uniqueConstraints = {
+                @UniqueConstraint(name ="favoris_titre_unique", columnNames = "titreFavoris")
+        }*/
 )
 public class Favoris {
     @Id
@@ -31,8 +31,7 @@ public class Favoris {
     private long id;
 
     @Column(
-            name = "titre",
-            nullable = false
+            name = "titre"
     )
     private String titre;
 
@@ -74,6 +73,8 @@ public class Favoris {
         this.titre = titre;
         this.nbSeries = nbSeries;
     }
+
+    public Favoris(){}
 
     public String getTitre() {
         return titre;

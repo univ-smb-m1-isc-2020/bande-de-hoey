@@ -1,5 +1,6 @@
 package info806.GestionBD.api;
 
+import info806.GestionBD.model.Serie;
 import info806.GestionBD.model.Utilisateur;
 import info806.GestionBD.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,11 @@ public class UtilisateurController {
         return utilisateurService.login(mail,mdp);
     }
 
+    @GetMapping(path = "connectedUser")
+    public Utilisateur getConnectedUser(){
+        return utilisateurService.getConnectedUser();
+    }
+
     // Post
     @PostMapping(path = "create")
     public void create(){
@@ -72,6 +78,12 @@ public class UtilisateurController {
     public void delete(@RequestBody Utilisateur user){
         System.out.println(user.toString());
         utilisateurService.delete(user);
+    }
+
+    @PostMapping(path = "addSerie")
+    public void addSerieToFavoris(@RequestBody Serie serie){
+        System.out.println(serie);
+        utilisateurService.addSerieToFavoris(serie);
     }
 
 }

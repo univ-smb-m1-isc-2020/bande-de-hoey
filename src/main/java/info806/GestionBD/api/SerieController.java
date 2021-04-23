@@ -32,9 +32,9 @@ public class SerieController {
 
     @PostMapping(path = "create")
     public void create(){
-        Serie serie =  new Serie( Etat.Abandonnee, "serie1", Genre.Action,2 , Format.BD);
-        Serie serie2 =  new Serie( Etat.EnCours, "serie2", Genre.Comic,1 , Format.BD);
-        Serie serie3 =  new Serie( Etat.Terminee, "serie3", Genre.Action,5 , Format.Livre);
+        Serie serie =  new Serie( "Abandonee", "serie1", "Action",2 , "BD");
+        Serie serie2 =  new Serie( "EnCours", "serie2", "Comic",1 , "BD");
+        Serie serie3 =  new Serie( "Terminee", "serie3", "Action",5 , "Livre");
         var listSerie = new ArrayList<Serie>();
         listSerie.add(serie);
         listSerie.add(serie2);
