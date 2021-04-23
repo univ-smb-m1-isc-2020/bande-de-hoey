@@ -17,7 +17,13 @@ import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.RenderedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
 public class Scraping {
@@ -94,7 +100,16 @@ public class Scraping {
                 .method("GET", null)
                 .addHeader("Cookie", "JSESSIONID=EE1AAD31F97DB757C9709E1E30B2D2CC")
                 .build();
-        Response noticeResponse = client.newCall(request).execute();
+        Response noticeResponse = noticeClient.newCall(request).execute();
+
+
+        OkHttpClient imageClient = new OkHttpClient().newBuilder()
+                .build();
+        Request imageRequest = new Request.Builder()
+                .url("https://catalogue.bm-lyon.fr/in/rest/Thumb/image?id=p%3A%3Ausmarcdef_0000389350&isbn=9782205006933&author=Morris%2C+%281923-2001%29&title=Le+grand+duc+%2F+%5BLivre%5D+%2F+dessins+de+Morris+%3B+sc%C3%A9nario+de+Goscinny&year=1999&publisher=Dargaud&TypeOfDocument=LyonPhysicalDocument&mat=bande_dessinees&ct=true&size=512&isPhysical=1")
+                .method("GET", null)
+                .build();
+        Response imageResponse = imageClient.newCall(imageRequest).execute();
 
 
 
@@ -140,8 +155,7 @@ public class Scraping {
                         .method("GET", null)
                         .addHeader("Cookie", "JSESSIONID=EE1AAD31F97DB757C9709E1E30B2D2CC")
                         .build();
-
-                noticeResponse = client.newCall(noticeRequest).execute();
+                noticeResponse = noticeClient.newCall(noticeRequest).execute();
 
                 txt = noticeResponse.body().string();
                 json = new JSONObject(txt);
@@ -151,7 +165,6 @@ public class Scraping {
                 for(int k = 0; k < fields.length(); k++){
                     JSONObject o = (JSONObject)fields.get(k);
                     String name = o.getString("name");
-                    //System.out.println(name);
                     switch (name){
                         default:
                             break;
@@ -178,6 +191,33 @@ public class Scraping {
                             break;
                     }
                 }
+                JSONArray summary = json.getJSONArray("summary");
+                for(int l = 0; l < summary.length(); l++){
+                    JSONObject o = (JSONObject)summary.get(l);
+                    String name = o.getString("name");
+                    switch (name){
+                        default:
+                            break;
+                        case "imageSource_512":
+                            imageRequest = new Request.Builder()
+                                    .url("https://catalogue.bm-lyon.fr"+o.getString("value"))
+                                    .method("GET", null)
+                                    .build();
+                            imageResponse = imageClient.newCall(imageRequest).execute();
+
+                            //
+                            // IMAGE
+                            /*
+                            Image imagetest = null;
+                            URL url = new URL("https://catalogue.bm-lyon.fr"+o.getString("value"));
+                            imagetest = ImageIO.read(url);
+                            ImageIO.write((RenderedImage) imagetest, "jpg", new File("C:\\Users\\Admin\\Pictures\\image.jpg"));
+                            System.out.println(imageResponse.body().string());*/
+
+                            break;
+                    }
+                }
+
 
                 System.out.println("Titre : "+titre+"\nISBN : "+isbn+"\nCreator : "+creator+"\nCreatorBis : "+creatorbis+"\nSerie : "+serie+"\nNuméro : "+numero);
 
