@@ -65,7 +65,7 @@ public class Favoris {
 
     @ManyToMany (cascade = CascadeType.ALL)
     @JoinColumn(name = "albums", referencedColumnName = "id")
-    private List<Auteur> albums = new ArrayList<>();
+    private List<Album> albums = new ArrayList<>();
 
     /*************************************************************************/
 
@@ -124,11 +124,11 @@ public class Favoris {
         this.nbAlbums = nbAlbums;
     }
 
-    public List<Auteur> getAlbums() {
+    public List<Album> getAlbums() {
         return albums;
     }
 
-    public void setAlbums(List<Auteur> albums) {
+    public void setAlbums(List<Album> albums) {
         this.albums = albums;
     }
 

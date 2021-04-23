@@ -1,5 +1,7 @@
 package info806.GestionBD.api;
 
+import info806.GestionBD.model.Album;
+import info806.GestionBD.model.Auteur;
 import info806.GestionBD.model.Serie;
 import info806.GestionBD.model.Utilisateur;
 import info806.GestionBD.service.UtilisateurService;
@@ -80,10 +82,22 @@ public class UtilisateurController {
         utilisateurService.delete(user);
     }
 
-    @PostMapping(path = "addSerie")
+    @PostMapping(path = "addSerieToFavoris")
     public void addSerieToFavoris(@RequestBody Serie serie){
         System.out.println(serie);
         utilisateurService.addSerieToFavoris(serie);
+    }
+
+    @PostMapping(path = "addAlbumToFavoris")
+    public void addAlbumToFavoris(@RequestBody Album album){
+        System.out.println(album);
+        utilisateurService.addAlbumToFavoris(album);
+    }
+
+    @PostMapping(path = "addAuteurToFavoris")
+    public void addAlbumToFavoris(@RequestBody Auteur auteur){
+        System.out.println(auteur);
+        utilisateurService.addAuteurToFavoris(auteur);
     }
 
 }

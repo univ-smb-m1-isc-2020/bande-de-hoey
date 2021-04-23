@@ -1,9 +1,14 @@
+let resFinal;
 $(document).ready(function() {
     let id = 0;
+
     function serie(){
+
         var res = document.getElementById("serie-select").value;
         var search = document.getElementById("serie-search").value;
         var url = "http://localhost:8080/serie/";
+        //var url ="https://bande-de-hoey.oups.net/serie/";
+        
         search="serie1";
         if(res == "title"){
             url = url+"byTitle?title="+search;
@@ -42,9 +47,8 @@ $(document).ready(function() {
                 tr.append(td);
                 td = $("<td>type</td>").text(result["type"]);
                 tr.append(td);
-                var button = $("<button value='test' class='addFavoris'>testss</button>");
                 resFinal = result;
-                td = $("<td>\<button id='but-test' value='3' onclick='addSerieToFavoris(resFinal)' >add to favoris</button>\</td>");
+                td = $("<td>\<button id='but-test'  onclick='addSerieToFavoris(resFinal)' >add to favoris</button>\</td>");
                 tr.append(td);
 
                 $("#table").append(tr);
@@ -70,7 +74,7 @@ function addSerieToFavoris(serie){
         "format":serie["format"],
     });
 
-    fetch("http://localhost:8080/utilisateur/addSerie", {
+    fetch("http://localhost:8080/utilisateur/addSerieToFavoris", {
         method: 'POST',
         headers: myHeaders,
         body: body,
