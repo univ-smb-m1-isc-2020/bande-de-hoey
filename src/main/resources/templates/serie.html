@@ -12,6 +12,7 @@
         $(function(){
             $("#header").load("header.html");
         });
+
     </script>
 </head>
 <body>
@@ -27,7 +28,10 @@
 
     <div>
         <input type="search" id="serie-search" name="search" placeholder="Recherche...">
-        <input type="submit" name="submit"  value="Validez" onclick="serie();"/>
+        <input type="submit" id="submit-id" name="submit"  value="Validez" />
+    </div>
+    <div id="res">
+
     </div>
 </body>
 </html>
