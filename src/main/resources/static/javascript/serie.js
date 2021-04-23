@@ -1,49 +1,86 @@
+let resFinal;
 $(document).ready(function() {
     let id = 0;
+
     function serie(){
+
         var res = document.getElementById("serie-select").value;
         var search = document.getElementById("serie-search").value;
-        var url;
-
+        var url = "http://localhost:8080/serie/";
+        //var url ="https://bande-de-hoey.oups.net/serie/";
+        
+        search="serie1";
         if(res == "title"){
-            url = "http://localhost:8080/serie/byTitle?title="+search;
+            url = url+"byTitle?title="+search;
         }else if(res == "format"){
-            url = "http://localhost:8080/serie/byFormat?format="+search;
+            url = url+"byFormat?format="+search;
         }else if(res == "auteur"){
-            url = "http://localhost:8080/serie/byAuteur?auteur="+search;
+            url = url+"byAuteur?auteur="+search;
         }else if(res == "type"){
-            url = "http://localhost:8080/serie/byType?tyep="+search;
+            url = url+"byType?tyep="+search;
         }else if(res == "etat"){
-            url = "http://localhost:8080/serie/byEtat?etat="+search;
+            url = url+"byEtat?etat="+search;
         }else{
-            alert("error")
+            alert("error");
         }
-        console.log(url)
+
         fetch(url, {
             method: 'GET',
             redirect: 'follow',
         })
-            .then(response => response.text())
+            .then(response => response.json())
             .then(result => {
                 console.log(result);
+                var tr = $("<tr></tr>");
 
-                var div = $("<div></div>");// Create with jQuery
+                var td = $("<td>titre</td>").text(result["titre"]);
+                tr.append(td);
+                td = $("<td>Etat</td>").text(result["etat"]);
+                tr.append(td);
+                td = $("<td>albums</td>").text(result["albumes"]);
+                tr.append(td);
+                td = $("<td>auteurs</td>").text(result["auteurs"]);
+                tr.append(td);
+                td = $("<td>nb albums</td>").text(result["nbAlbum"]);
+                tr.append(td);
+                td = $("<td>format</td>").text(result["format"]);
+                tr.append(td);
+                td = $("<td>type</td>").text(result["type"]);
+                tr.append(td);
+                resFinal = result;
+                td = $("<td>\<button id='but-test'  onclick='addSerieToFavoris(resFinal)' >add to favoris</button>\</td>");
+                tr.append(td);
 
-                var res = $("<div class='serie'></div>").text(result);
-                var button = $("<input type='submit' value='favorissss' name='submit' id='test' class='addFavoris'/>");
+                $("#table").append(tr);
 
-                div.append(res);
-                div.append(button);
-                $("#res").append(div);
+
             })
             .catch(error => console.log('error', error));
     }
 
-    function testq(){
-        alert("testttttt");
-        console.log('clicked : ');
-    }
-
     $('#submit-id').click(serie);
-    $('#test').click(testq);
+
 });
+
+function addSerieToFavoris(serie){
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var body = JSON.stringify({
+        "etat":serie["etat"],
+        "titre":serie["titre"],
+        "type":serie["type"],
+        "nbAlbum":serie["nbAlbum"],
+        "format":serie["format"],
+    });
+
+    fetch("http://localhost:8080/utilisateur/addSerieToFavoris", {
+        method: 'POST',
+        headers: myHeaders,
+        body: body,
+        redirect: 'follow',
+    })
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+}

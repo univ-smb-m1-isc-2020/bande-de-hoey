@@ -12,10 +12,10 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Serie")
 @Table(
-        name = "Serie",
-        uniqueConstraints = {
+        name = "Serie"
+        /*uniqueConstraints = {
                 @UniqueConstraint(name = "Serie_titre_unique", columnNames = "titre")
-        }
+        }*/
 )
 public class Serie {
 
@@ -39,7 +39,7 @@ public class Serie {
             name = "etat",
             nullable = false
     )
-    private Etat etat;
+    private String etat;
 
     @Column(
             name = "titre",
@@ -51,7 +51,7 @@ public class Serie {
             name = "type",
             nullable = false
     )
-    private Genre type;
+    private String type;
 
     @Column(
             name = "nb_album",
@@ -63,7 +63,7 @@ public class Serie {
             name = "format",
             nullable = false
     )
-    private Format format;
+    private String format;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "albumes", referencedColumnName = "id")
@@ -75,7 +75,7 @@ public class Serie {
 
     public Serie(){}
 
-    public Serie(Etat etat, String titre, Genre type, int nbAlbum, Format format) {
+    public Serie(String etat, String titre, String type, int nbAlbum, String format) {
         this.etat = etat;
         this.titre = titre;
         this.type = type;
@@ -91,11 +91,11 @@ public class Serie {
         this.auteurs = auteurs;
     }
 
-    public Etat getEtat() {
+    public String getEtat() {
         return etat;
     }
 
-    public void setEtat(Etat etat) {
+    public void setEtat(String etat) {
         this.etat = etat;
     }
 
@@ -107,11 +107,11 @@ public class Serie {
         this.titre = titre;
     }
 
-    public Genre getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Genre type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -123,11 +123,11 @@ public class Serie {
         this.nbAlbum = nbAlbum;
     }
 
-    public Format getFormat() {
+    public String getFormat() {
         return format;
     }
 
-    public void setFormat(Format format) {
+    public void setFormat(String format) {
         this.format = format;
     }
 

@@ -1,8 +1,7 @@
 package info806.GestionBD.service;
 
 
-import info806.GestionBD.model.Album;
-import info806.GestionBD.model.Utilisateur;
+import info806.GestionBD.model.*;
 import info806.GestionBD.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,7 +69,12 @@ public class UtilisateurService {
         if(user != null){
             res = user.getMdp().matches(mdp);
         }
+        Utilisateur.setConnectedUser(user);
         return res;
+    }
+
+    public Utilisateur getConnectedUser(){
+        return Utilisateur.getConnectedUser();
     }
 
     public void delete(Utilisateur user){
@@ -79,5 +83,44 @@ public class UtilisateurService {
         }catch (Exception e){
             System.out.println("Exception : "+e);
         }
+    }
+
+    public void addSerieToFavoris(Serie serie) {
+        if(Utilisateur.getConnectedUser().getFavoris() == null){
+            Favoris f = new Favoris(null,0,0,0);
+            var u =Utilisateur.getConnectedUser();
+            u.setFavoris(f);
+            Utilisateur.setConnectedUser(u);
+        }
+        Utilisateur.getConnectedUser().getFavoris().getSeries().add(serie);
+        var nb = Utilisateur.getConnectedUser().getFavoris().getSeries().size();
+        Utilisateur.getConnectedUser().getFavoris().setNbSeries(nb);
+        utilisateurRepository.save(Utilisateur.getConnectedUser());
+    }
+
+    public void addAlbumToFavoris(Album album) {
+        if(Utilisateur.getConnectedUser().getFavoris() == null){
+            Favoris f = new Favoris(null,0,0,0);
+            var u =Utilisateur.getConnectedUser();
+            u.setFavoris(f);
+            Utilisateur.setConnectedUser(u);
+        }
+        Utilisateur.getConnectedUser().getFavoris().getAlbums().add(album);
+        var nb = Utilisateur.getConnectedUser().getFavoris().getAlbums().size();
+        Utilisateur.getConnectedUser().getFavoris().setNbAlbums(nb);
+        utilisateurRepository.save(Utilisateur.getConnectedUser());
+    }
+
+    public void addAuteurToFavoris(Auteur auteur) {
+        if(Utilisateur.getConnectedUser().getFavoris() == null){
+            Favoris f = new Favoris(null,0,0,0);
+            var u =Utilisateur.getConnectedUser();
+            u.setFavoris(f);
+            Utilisateur.setConnectedUser(u);
+        }
+        Utilisateur.getConnectedUser().getFavoris().getAuteurs().add(auteur);
+        var nb = Utilisateur.getConnectedUser().getFavoris().getAuteurs().size();
+        Utilisateur.getConnectedUser().getFavoris().setNbAuteurs(nb);
+        utilisateurRepository.save(Utilisateur.getConnectedUser());
     }
 }

@@ -8,10 +8,10 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Favoris")
 @Table(
-        name = "Favoris",
-        uniqueConstraints = {
-                @UniqueConstraint(name ="favoris_titre_unique", columnNames = "titre")
-        }
+        name = "Favoris"
+        /*uniqueConstraints = {
+                @UniqueConstraint(name ="favoris_titre_unique", columnNames = "titreFavoris")
+        }*/
 )
 public class Favoris {
     @Id
@@ -31,8 +31,7 @@ public class Favoris {
     private long id;
 
     @Column(
-            name = "titre",
-            nullable = false
+            name = "titre"
     )
     private String titre;
 
@@ -66,7 +65,7 @@ public class Favoris {
 
     @ManyToMany (cascade = CascadeType.ALL)
     @JoinColumn(name = "albums", referencedColumnName = "id")
-    private List<Auteur> albums = new ArrayList<>();
+    private List<Album> albums = new ArrayList<>();
 
     /*************************************************************************/
 
@@ -74,6 +73,8 @@ public class Favoris {
         this.titre = titre;
         this.nbSeries = nbSeries;
     }
+
+    public Favoris(){}
 
     public String getTitre() {
         return titre;
@@ -123,11 +124,11 @@ public class Favoris {
         this.nbAlbums = nbAlbums;
     }
 
-    public List<Auteur> getAlbums() {
+    public List<Album> getAlbums() {
         return albums;
     }
 
-    public void setAlbums(List<Auteur> albums) {
+    public void setAlbums(List<Album> albums) {
         this.albums = albums;
     }
 

@@ -61,9 +61,9 @@ public class Utilisateur{
     )
     private String mdp;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "favoris", referencedColumnName = "id")
-    private List<Favoris> favoris = new ArrayList<>();
+    private Favoris favoris;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "suivis", referencedColumnName = "id")
@@ -73,6 +73,15 @@ public class Utilisateur{
     @JoinColumn(name = "collections", referencedColumnName = "id")
     private List<Collection> collections = new ArrayList<>();
 
+    public static Utilisateur connectedUser;
+
+    public static Utilisateur getConnectedUser() {
+        return connectedUser;
+    }
+
+    public static void setConnectedUser(Utilisateur connectedUser) {
+        Utilisateur.connectedUser = connectedUser;
+    }
 
     public Utilisateur(String pseudo, String nom, String prenom, String mail, String mdp) {
         this.pseudo = pseudo;
@@ -80,6 +89,7 @@ public class Utilisateur{
         this.prenom = prenom;
         this.mail = mail;
         this.mdp = mdp;
+        this.favoris = null;
     }
 
     public Utilisateur(){}
@@ -132,11 +142,11 @@ public class Utilisateur{
         this.mdp = mdp;
     }
 
-    public List<Favoris> getFavoris() {
+    public Favoris getFavoris() {
         return favoris;
     }
 
-    public void setFavoris(List<Favoris> favoris) {
+    public void setFavoris(Favoris favoris) {
         this.favoris = favoris;
     }
 

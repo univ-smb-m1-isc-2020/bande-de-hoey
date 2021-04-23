@@ -16,10 +16,10 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Primary
 @Entity(name = "Album")
 @Table(
-        name = "Album",
-        uniqueConstraints = {
+        name = "Album"
+       /* uniqueConstraints = {
                 @UniqueConstraint(name ="album_titre_unique", columnNames = "titre")
-        }
+        }*/
 )
 public class Album {
 
