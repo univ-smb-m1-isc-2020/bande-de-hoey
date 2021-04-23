@@ -44,7 +44,7 @@ $(document).ready(function() {
                 tr.append(td);
                 var button = $("<button value='test' class='addFavoris'>testss</button>");
                 resFinal = result;
-                td = $("<td>\<button id='but-test' value='3' onclick='addFavoris(resFinal)' >add to favoris</button>\</td>");
+                td = $("<td>\<button id='but-test' value='3' onclick='addSerieToFavoris(resFinal)' >add to favoris</button>\</td>");
                 tr.append(td);
 
                 $("#table").append(tr);
@@ -57,14 +57,6 @@ $(document).ready(function() {
     $('#submit-id').click(serie);
 
 });
-
-function addFavoris(res){
-    console.log('clicked : ' +res["type"]);
-
-    //send to the backend
-
-    addSerieToFavoris(res);
-};
 
 function addSerieToFavoris(serie){
     var myHeaders = new Headers();
@@ -86,19 +78,5 @@ function addSerieToFavoris(serie){
     })
         .then(response => response.text())
         .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-}
-
-function getConnectedUser() {
-    var url ="http://localhost:8080/utilisateur/connectedUser"
-    fetch(url, {
-        method: 'GET',
-        redirect: 'follow',
-    })
-        .then(response => response.json())
-        .then(result => {
-            console.log(result);
-            return result;
-        })
         .catch(error => console.log('error', error));
 }
