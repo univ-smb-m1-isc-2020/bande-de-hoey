@@ -193,5 +193,6 @@ public class UtilisateurService {
         var nb = Utilisateur.getConnectedUser().getCollections().getSeries().size();
         Utilisateur.getConnectedUser().getCollections().setNbSeries(nb);
         utilisateurRepository.save(Utilisateur.getConnectedUser());
+
     }
 }
