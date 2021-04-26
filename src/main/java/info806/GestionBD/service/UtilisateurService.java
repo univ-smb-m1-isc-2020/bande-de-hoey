@@ -123,4 +123,30 @@ public class UtilisateurService {
         Utilisateur.getConnectedUser().getFavoris().setNbAuteurs(nb);
         utilisateurRepository.save(Utilisateur.getConnectedUser());
     }
+
+    public void addAlbumToSuivis(Album album) {
+        if(Utilisateur.getConnectedUser().getSuivis() == null){
+            Suivis s = new Suivis(null,0,0,0);
+            var u =Utilisateur.getConnectedUser();
+            u.setSuivis(s);
+            Utilisateur.setConnectedUser(u);
+        }
+        Utilisateur.getConnectedUser().getSuivis().getAlbums().add(album);
+        var nb = Utilisateur.getConnectedUser().getSuivis().getAlbums().size();
+        Utilisateur.getConnectedUser().getSuivis().setNbAlbums(nb);
+        utilisateurRepository.save(Utilisateur.getConnectedUser());
+    }
+
+    public void addAlbumToCollections(Album album) {
+        if(Utilisateur.getConnectedUser().getCollections() == null){
+            Collection c = new Collection(null,0,0,0);
+            var u =Utilisateur.getConnectedUser();
+            u.setCollections(c);
+            Utilisateur.setConnectedUser(u);
+        }
+        Utilisateur.getConnectedUser().getCollections().getAlbums().add(album);
+        var nb = Utilisateur.getConnectedUser().getCollections().getAlbums().size();
+        Utilisateur.getConnectedUser().getCollections().setNbAlbums(nb);
+        utilisateurRepository.save(Utilisateur.getConnectedUser());
+    }
 }

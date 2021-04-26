@@ -65,13 +65,13 @@ public class Utilisateur{
     @JoinColumn(name = "favoris", referencedColumnName = "id")
     private Favoris favoris;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "suivis", referencedColumnName = "id")
-    private List<Suivis> suivis = new ArrayList<>();
+    private Suivis suivis;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "collections", referencedColumnName = "id")
-    private List<Collection> collections = new ArrayList<>();
+    private Collection collections;
 
     public static Utilisateur connectedUser;
 
@@ -150,19 +150,19 @@ public class Utilisateur{
         this.favoris = favoris;
     }
 
-    public List<Suivis> getSuivis() {
+    public Suivis getSuivis() {
         return suivis;
     }
 
-    public void setSuivis(List<Suivis> suivis) {
+    public void setSuivis(Suivis suivis) {
         this.suivis = suivis;
     }
 
-    public List<Collection> getCollections() {
+    public Collection getCollections() {
         return collections;
     }
 
-    public void setCollections(List<Collection> collections) {
+    public void setCollections(Collection collections) {
         this.collections = collections;
     }
 

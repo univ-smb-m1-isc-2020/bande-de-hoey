@@ -1,5 +1,8 @@
 
-let resFinal ;
+let resFinal;
+const fav = "favoris";
+const suiv = "suivis";
+const coll = "collections";
 $(document).ready(function() {
 
     function album(){
@@ -44,7 +47,12 @@ $(document).ready(function() {
                 td = $("<td>auteur</td>").text(result["auteurs"]);
                 tr.append(td);
                 resFinal = result;
-                td = $("<td>\<button id='but-test' onclick='addAlbumToFavoris(resFinal)' >add to favoris</button>\</td>");
+
+                td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)'>add to favoris</button>\</td>");
+                tr.append(td);
+                td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)'>Suivre</button>\</td>");
+                tr.append(td);
+                td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)'>add to my collection</button>\</td>");
                 tr.append(td);
                 $("#table").append(tr);
             })
@@ -53,7 +61,16 @@ $(document).ready(function() {
     $('#submit-id').click(album);
 });
 
-function addAlbumToFavoris(album){
+function addAlbum(album,to){
+    var url = "http://localhost:8080/utilisateur/addAlbumTo";
+    if(to=='favoris'){
+        url = url+"Favoris";
+    }else if(to =='suivis'){
+        url = url+"Suivis";
+    }else{
+        url = url+"Collections";
+    }
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -68,7 +85,7 @@ function addAlbumToFavoris(album){
         "auteurs":album["auteurs"],
     });
 
-    fetch("http://localhost:8080/utilisateur/addAlbumToFavoris", {
+    fetch(url, {
         method: 'POST',
         headers: myHeaders,
         body: body,

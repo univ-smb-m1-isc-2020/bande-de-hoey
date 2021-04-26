@@ -8,10 +8,10 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Suivis")
 @Table(
-        name = "Suivis",
-        uniqueConstraints = {
+        name = "Suivis"
+/*        uniqueConstraints = {
                 @UniqueConstraint(name ="suivis_titre_unique", columnNames = "titre")
-        }
+        }*/
 )
 public class Suivis {
     @Id
@@ -31,8 +31,7 @@ public class Suivis {
     private long id;
 
     @Column(
-            name = "titre",
-            nullable = false
+            name = "titre"
     )
     private String titre;
 
@@ -41,6 +40,12 @@ public class Suivis {
             nullable = false
     )
     private int nbSeries;
+
+    @Column(
+            name = "nb_albums",
+            nullable = false
+    )
+    private int nbAlbums;
 
     @Column(
             name = "nb_auteurs",
@@ -56,13 +61,36 @@ public class Suivis {
     @JoinColumn(name = "auteurs", referencedColumnName = "id")
     private List<Auteur> auteurs = new ArrayList<>();
 
+    @ManyToMany (cascade = CascadeType.ALL)
+    @JoinColumn(name = "albums", referencedColumnName = "id")
+    private List<Album> albums = new ArrayList<>();
+
 
     /*************************************************************************/
 
-    public Suivis(String titre, int nbSeries, int nbAuteurs) {
+    public Suivis(String titre, int nbSeries, int nbAuteurs, int nbAlbums) {
         this.titre = titre;
         this.nbSeries = nbSeries;
         this.nbAuteurs = nbAuteurs;
+        this.nbAlbums = nbAlbums;
+    }
+
+    public Suivis(){}
+
+    public int getNbAlbums() {
+        return nbAlbums;
+    }
+
+    public void setNbAlbums(int nbAlbum) {
+        this.nbAlbums = nbAlbums;
+    }
+
+    public List<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(List<Album> albums) {
+        this.albums = albums;
     }
 
     public String getTitre() {
