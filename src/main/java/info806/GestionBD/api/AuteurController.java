@@ -53,6 +53,11 @@ public class AuteurController {
         auteurService.create(listAuteur);
     }
 
+    @PostMapping(path = "createListAuteur")
+    public void createListAuteur(ArrayList<Auteur> listAuteur){
+        auteurService.create(listAuteur);
+    }
+
     @PostMapping(path = "addAlbum")
     public void addAlbum(String nom, Album album){
         auteurService.addAlbum(nom, album);

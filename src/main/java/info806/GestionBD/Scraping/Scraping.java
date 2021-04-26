@@ -1,6 +1,7 @@
 package info806.GestionBD.Scraping;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
+import info806.GestionBD.model.Album;
 import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import okhttp3.OkHttpClient;
 import okhttp3.MediaType;
@@ -23,6 +24,7 @@ import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
@@ -33,43 +35,12 @@ public class Scraping {
     static final String URL_IMAGE = "https://catalogue.bm-lyon.fr/";
     static final String URL_NOTICE = "https://catalogue.bm-lyon.fr/in/rest/api/notice?";
 
+    private ArrayList<List> listData = new ArrayList<List>();
+    private List tempList;
 
-    /*
-     peux visualiser une album (ISBN, titre, image série, numéro d'ordre pour la série, genre, format), une série (liste des albums appartenant a la série par ordre dans la série)
-    je peux rechercher des bandes dessinée par auteur / série / titre / isbn,
-    je peux marquer un album comm faisant partie de ma collection
-    je peux marquer une série, un auteur comme suivie.
+    public Scraping(){}
 
-    */
-
-    public static void main(String[] args) throws JSONException, IOException {
-
-        /*
-        String bodytext = "{\"queryid\":\"fb33204c-acff-4451-98c0-2b5847179e5d\",\"advancedQuery\":{\"limitClause\":\"ZMAT:\\\"bande_dessinees\\\" languageLimit_s:\\\"fre\\\"\",\"pageSize\":10,\"searchContext\":\"advancedsearch\",\"searchType\":\"all\",\"section\":\"*\",\"sort\":\"score\",\"terms\":[]},\"mappedFQ\":{},\"includeFacets\":true,\"sf\":\"*\",\"order\":\"score\",\"pageSize\":8,\"locale\":\"fr\"}";
-        JSONObject json = new JSONObject(bodytext);
-        System.out.println(json);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        MappingJackson2HttpMessageConverter jsonHttpMessageConverter = new MappingJackson2HttpMessageConverter();
-        jsonHttpMessageConverter.getObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        restTemplate.getMessageConverters().add(jsonHttpMessageConverter);
-
-        // Data attached to the request.
-        HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
-
-        // Send request with POST method.
-        JSONObject e = restTemplate.postForObject(URL_SEARCH, requestBody, JSONObject.class);
-        */
-
-
-
-
-
+    public ArrayList<List> scraping() throws JSONException, IOException{
         //SEARCH
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .connectTimeout(10, TimeUnit.SECONDS)
@@ -221,6 +192,25 @@ public class Scraping {
 
                 System.out.println("Titre : "+titre+"\nISBN : "+isbn+"\nCreator : "+creator+"\nCreatorBis : "+creatorbis+"\nSerie : "+serie+"\nNuméro : "+numero);
 
+                //tempList Add Album
+                tempList.add("");
+                tempList.add(isbn);
+                tempList.add(titre);
+                tempList.add(image);
+                tempList.add("");
+                tempList.add(numero);
+
+                //tempList Add other
+                tempList.add(creator);
+                tempList.add(creatorbis);
+                tempList.add(serie);
+
+                //Add tempList to listAlbum
+                listData.add(tempList);
+
+                //Clear tempList
+                tempList.removeAll();
+
                 isbn = "";
                 titre = "";
                 serie = "";
@@ -228,10 +218,10 @@ public class Scraping {
                 image = "";
                 creator = "";
                 creatorbis = "";
-
             }
         }
 
+        return listData;
     }
 
 }

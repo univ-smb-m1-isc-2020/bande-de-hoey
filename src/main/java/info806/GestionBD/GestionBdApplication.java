@@ -1,5 +1,6 @@
 package info806.GestionBD;
 
+import info806.GestionBD.Scraping.Scraping;
 import info806.GestionBD.api.AlbumController;
 import info806.GestionBD.api.AuteurController;
 import info806.GestionBD.api.SerieController;
@@ -25,8 +26,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /*@ComponentScan({"info806.GestionBD.api", "info806.GestionBD.repositories"})
 @EnableJpaRepositories("info806.GestionBD.repositories")*/
@@ -70,6 +71,24 @@ public class GestionBdApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		//Create
+		Scraping scrapingTool = new Scraping();
+		ArrayList<List> list = scrapingTool.scraping();
+		ArrayList<Album> listAlbum = new ArrayList<Album>();
+		ArrayList<Auteur> listAuteur = new ArrayList<Auteur>();
+		ArrayList<Serie> listSerie = new ArrayList<Serie>();
+		List temp;
+		for(int i = 0; i<list.size(); i++){
+			temp = list.get(i);
+			listAlbum.add(new Album(temp.getItem(0), temp.getItem(1), temp.getItem(2), temp.getItem(3), temp.getItem(4), Integer.getInteger(temp.getItem(5))));
+			listAuteur.add(new Auteur(temp.getItem(6),""));
+			if(temp.getItem(7) != ""){listAuteur.add(new Auteur(temp.getItem(7),""));}
+			if(temp.getItem(8) != ""){listSerie.add(new Serie("",temp.getItem(8),"",0,""));}
+		}
+		albumController.createListAlbum(listAlbum);
+		auteurController.createListAuteur(listAuteur);
+		serieController.createListSerie(listSerie);
+
+		//create test
 		albumController.create();
 		auteurController.create();
 		serieController.create();
