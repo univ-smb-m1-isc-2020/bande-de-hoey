@@ -17,6 +17,7 @@ import info806.GestionBD.repositories.SerieRepository;
 import info806.GestionBD.repositories.UtilisateurRepository;
 import info806.GestionBD.service.AlbumService;
 import info806.GestionBD.service.AuteurService;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,6 +28,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /*@ComponentScan({"info806.GestionBD.api", "info806.GestionBD.repositories"})
@@ -53,10 +55,15 @@ public class GestionBdApplication implements CommandLineRunner{
 	@Autowired
 	private UtilisateurController utilisateurController;
 
+
 	public static SerieRepository testS;
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, JSONException {
 		SpringApplication.run(GestionBdApplication.class, args);
 		//System.out.println(albumRepository.findAll().get(0));
+
+		var scrapingTool = new Scraping();
+		ArrayList<List> list = scrapingTool.scraping();
+
 		System.out.println("hooey");
 
 	}
@@ -71,28 +78,29 @@ public class GestionBdApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		//Create
-		Scraping scrapingTool = new Scraping();
-		ArrayList<List> list = scrapingTool.scraping();
-		ArrayList<Album> listAlbum = new ArrayList<Album>();
+
+
+
+		/*ArrayList<Album> listAlbum = new ArrayList<Album>();
 		ArrayList<Auteur> listAuteur = new ArrayList<Auteur>();
 		ArrayList<Serie> listSerie = new ArrayList<Serie>();
-		List temp;
-		for(int i = 0; i<list.size(); i++){
+		List temp;*/
+		/*for(int i = 0; i<list.size(); i++){
 			temp = list.get(i);
-			listAlbum.add(new Album(temp.getItem(0), temp.getItem(1), temp.getItem(2), temp.getItem(3), temp.getItem(4), Integer.getInteger(temp.getItem(5))));
+			listAlbum.add(new Album(temp.getItem(0), temp.getItem(1), temp.getItem(2), temp.getItem(3), temp.getItem(4), 0));
 			listAuteur.add(new Auteur(temp.getItem(6),""));
 			if(temp.getItem(7) != ""){listAuteur.add(new Auteur(temp.getItem(7),""));}
 			if(temp.getItem(8) != ""){listSerie.add(new Serie("",temp.getItem(8),"",0,""));}
-		}
-		albumController.createListAlbum(listAlbum);
+		}*/
+		/*albumController.createListAlbum(listAlbum);
 		auteurController.createListAuteur(listAuteur);
-		serieController.createListSerie(listSerie);
+		serieController.createListSerie(listSerie);*/
 
 		//create test
-		albumController.create();
+		/*albumController.create();
 		auteurController.create();
 		serieController.create();
-		utilisateurController.create();
+		utilisateurController.create();*/
 
 		//Add
 		/*var auteur = auteurController.getByName("clerc");

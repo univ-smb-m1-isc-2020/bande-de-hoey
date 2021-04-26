@@ -14,8 +14,11 @@ import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import javax.imageio.ImageIO;
@@ -35,12 +38,12 @@ public class Scraping {
     static final String URL_IMAGE = "https://catalogue.bm-lyon.fr/";
     static final String URL_NOTICE = "https://catalogue.bm-lyon.fr/in/rest/api/notice?";
 
-    private ArrayList<List> listData = new ArrayList<List>();
-    private List tempList;
 
     public Scraping(){}
 
-    public ArrayList<List> scraping() throws JSONException, IOException{
+    public  ArrayList<List> scraping() throws JSONException, IOException{
+        List tempList = new List();
+        ArrayList<List> listData = new ArrayList<List>();
         //SEARCH
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .connectTimeout(10, TimeUnit.SECONDS)
