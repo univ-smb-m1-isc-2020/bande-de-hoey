@@ -87,10 +87,7 @@ public class UtilisateurService {
 
     public void addSerieToFavoris(Serie serie) {
         if(Utilisateur.getConnectedUser().getFavoris() == null){
-            Favoris f = new Favoris(null,0,0,0);
-            var u =Utilisateur.getConnectedUser();
-            u.setFavoris(f);
-            Utilisateur.setConnectedUser(u);
+            createFavoris();
         }
         Utilisateur.getConnectedUser().getFavoris().getSeries().add(serie);
         var nb = Utilisateur.getConnectedUser().getFavoris().getSeries().size();
@@ -100,10 +97,7 @@ public class UtilisateurService {
 
     public void addAlbumToFavoris(Album album) {
         if(Utilisateur.getConnectedUser().getFavoris() == null){
-            Favoris f = new Favoris(null,0,0,0);
-            var u =Utilisateur.getConnectedUser();
-            u.setFavoris(f);
-            Utilisateur.setConnectedUser(u);
+            createFavoris();
         }
         Utilisateur.getConnectedUser().getFavoris().getAlbums().add(album);
         var nb = Utilisateur.getConnectedUser().getFavoris().getAlbums().size();
@@ -113,10 +107,7 @@ public class UtilisateurService {
 
     public void addAuteurToFavoris(Auteur auteur) {
         if(Utilisateur.getConnectedUser().getFavoris() == null){
-            Favoris f = new Favoris(null,0,0,0);
-            var u =Utilisateur.getConnectedUser();
-            u.setFavoris(f);
-            Utilisateur.setConnectedUser(u);
+            createFavoris();
         }
         Utilisateur.getConnectedUser().getFavoris().getAuteurs().add(auteur);
         var nb = Utilisateur.getConnectedUser().getFavoris().getAuteurs().size();
@@ -126,10 +117,7 @@ public class UtilisateurService {
 
     public void addAlbumToSuivis(Album album) {
         if(Utilisateur.getConnectedUser().getSuivis() == null){
-            Suivis s = new Suivis(null,0,0,0);
-            var u =Utilisateur.getConnectedUser();
-            u.setSuivis(s);
-            Utilisateur.setConnectedUser(u);
+            createSuivis();
         }
         Utilisateur.getConnectedUser().getSuivis().getAlbums().add(album);
         var nb = Utilisateur.getConnectedUser().getSuivis().getAlbums().size();
@@ -139,14 +127,71 @@ public class UtilisateurService {
 
     public void addAlbumToCollections(Album album) {
         if(Utilisateur.getConnectedUser().getCollections() == null){
-            Collection c = new Collection(null,0,0,0);
-            var u =Utilisateur.getConnectedUser();
-            u.setCollections(c);
-            Utilisateur.setConnectedUser(u);
+            createCollection();
         }
         Utilisateur.getConnectedUser().getCollections().getAlbums().add(album);
         var nb = Utilisateur.getConnectedUser().getCollections().getAlbums().size();
         Utilisateur.getConnectedUser().getCollections().setNbAlbums(nb);
+        utilisateurRepository.save(Utilisateur.getConnectedUser());
+    }
+
+    public void addAuteurToSuivis(Auteur auteur) {
+        if(Utilisateur.getConnectedUser().getSuivis() == null){
+            createSuivis();
+        }
+        Utilisateur.getConnectedUser().getSuivis().getAuteurs().add(auteur);
+        var nb = Utilisateur.getConnectedUser().getSuivis().getAuteurs().size();
+        Utilisateur.getConnectedUser().getSuivis().setNbAuteurs(nb);
+        utilisateurRepository.save(Utilisateur.getConnectedUser());
+    }
+
+    public void createSuivis(){
+        Suivis s = new Suivis(null,0,0,0);
+        var u = Utilisateur.getConnectedUser();
+        u.setSuivis(s);
+        Utilisateur.setConnectedUser(u);
+    }
+
+    public void createFavoris(){
+        Favoris f = new Favoris(null,0,0,0);
+        var u =Utilisateur.getConnectedUser();
+        u.setFavoris(f);
+        Utilisateur.setConnectedUser(u);
+    }
+    public void createCollection(){
+        Collection c = new Collection(null,0,0,0);
+        var u =Utilisateur.getConnectedUser();
+        u.setCollections(c);
+        Utilisateur.setConnectedUser(u);
+    }
+
+    public void addAuteurToCollection(Auteur auteur) {
+        if(Utilisateur.getConnectedUser().getCollections() == null){
+            createCollection();
+        }
+        Utilisateur.getConnectedUser().getCollections().getAuteurs().add(auteur);
+        var nb = Utilisateur.getConnectedUser().getCollections().getAuteurs().size();
+        Utilisateur.getConnectedUser().getCollections().setNbAuteurs(nb);
+        utilisateurRepository.save(Utilisateur.getConnectedUser());
+    }
+
+    public void addSerieToSuivis(Serie serie) {
+        if(Utilisateur.getConnectedUser().getSuivis() == null){
+            createSuivis();
+        }
+        Utilisateur.getConnectedUser().getSuivis().getSeries().add(serie);
+        var nb = Utilisateur.getConnectedUser().getSuivis().getSeries().size();
+        Utilisateur.getConnectedUser().getSuivis().setNbSeries(nb);
+        utilisateurRepository.save(Utilisateur.getConnectedUser());
+    }
+
+    public void addSerieToCollections(Serie serie) {
+        if(Utilisateur.getConnectedUser().getCollections() == null){
+            createCollection();
+        }
+        Utilisateur.getConnectedUser().getCollections().getSeries().add(serie);
+        var nb = Utilisateur.getConnectedUser().getCollections().getSeries().size();
+        Utilisateur.getConnectedUser().getCollections().setNbSeries(nb);
         utilisateurRepository.save(Utilisateur.getConnectedUser());
     }
 }

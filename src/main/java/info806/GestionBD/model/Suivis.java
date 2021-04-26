@@ -81,7 +81,7 @@ public class Suivis {
         return nbAlbums;
     }
 
-    public void setNbAlbums(int nbAlbum) {
+    public void setNbAlbums(int nbAlbums) {
         this.nbAlbums = nbAlbums;
     }
 

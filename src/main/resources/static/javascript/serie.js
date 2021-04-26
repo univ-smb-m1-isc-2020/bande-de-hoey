@@ -1,7 +1,8 @@
 let resFinal;
+const fav = "favoris";
+const suiv = "suivis";
+const coll = "collections";
 $(document).ready(function() {
-    let id = 0;
-
     function serie(){
 
         var res = document.getElementById("serie-select").value;
@@ -48,9 +49,12 @@ $(document).ready(function() {
                 td = $("<td>type</td>").text(result["type"]);
                 tr.append(td);
                 resFinal = result;
-                td = $("<td>\<button id='but-test'  onclick='addSerieToFavoris(resFinal)' >add to favoris</button>\</td>");
+                td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,fav)' >add to favoris</button>\</td>");
                 tr.append(td);
-
+                td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,suiv)' >add to suivis</button>\</td>");
+                tr.append(td);
+                td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,coll)' >add to collections</button>\</td>");
+                tr.append(td);
                 $("#table").append(tr);
 
 
@@ -62,7 +66,16 @@ $(document).ready(function() {
 
 });
 
-function addSerieToFavoris(serie){
+function addSerie(serie,to){
+    var url = "http://localhost:8080/utilisateur/addSerieTo";
+    if(to=='favoris'){
+        url = url+"Favoris";
+    }else if(to =='suivis'){
+        url = url+"Suivis";
+    }else{
+        url = url+"Collections";
+    }
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -74,7 +87,7 @@ function addSerieToFavoris(serie){
         "format":serie["format"],
     });
 
-    fetch("http://localhost:8080/utilisateur/addSerieToFavoris", {
+    fetch(url, {
         method: 'POST',
         headers: myHeaders,
         body: body,

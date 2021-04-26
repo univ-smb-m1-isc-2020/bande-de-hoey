@@ -82,18 +82,29 @@ public class UtilisateurController {
         utilisateurService.delete(user);
     }
 
+    //Serie
     @PostMapping(path = "addSerieToFavoris")
     public void addSerieToFavoris(@RequestBody Serie serie){
-        System.out.println(serie);
         utilisateurService.addSerieToFavoris(serie);
     }
 
+    @PostMapping(path = "addSerieToSuivis")
+    public void addSerieToSuivis(@RequestBody Serie serie){
+        utilisateurService.addSerieToSuivis(serie);
+    }
+
+    @PostMapping(path = "addSerieToCollections")
+    public void addSerieToCollections(@RequestBody Serie serie){
+        utilisateurService.addSerieToCollections(serie);
+    }
+
+    //Auteur
     @PostMapping(path = "addAuteurToFavoris")
     public void addAlbumToFavoris(@RequestBody Auteur auteur){
         utilisateurService.addAuteurToFavoris(auteur);
     }
 
- /*   @PostMapping(path = "addAuteurToSuivis")
+    @PostMapping(path = "addAuteurToSuivis")
     public void addAlbumToSuivis(@RequestBody Auteur auteur){
         utilisateurService.addAuteurToSuivis(auteur);
     }
@@ -102,7 +113,7 @@ public class UtilisateurController {
     public void addAlbumToCollections(@RequestBody Auteur auteur){
         utilisateurService.addAuteurToCollection(auteur);
     }
-   */
+    //Album
     @PostMapping(path = "addAlbumToFavoris")
     public void addAlbumToFavoris(@RequestBody Album album){
         utilisateurService.addAlbumToFavoris(album);
