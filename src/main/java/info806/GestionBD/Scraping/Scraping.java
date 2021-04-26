@@ -100,16 +100,16 @@ public class Scraping {
                 .method("GET", null)
                 .addHeader("Cookie", "JSESSIONID=EE1AAD31F97DB757C9709E1E30B2D2CC")
                 .build();
-        Response noticeResponse = noticeClient.newCall(request).execute();
+        Response noticeResponse;
 
-
+        // Image
         OkHttpClient imageClient = new OkHttpClient().newBuilder()
                 .build();
         Request imageRequest = new Request.Builder()
                 .url("https://catalogue.bm-lyon.fr/in/rest/Thumb/image?id=p%3A%3Ausmarcdef_0000389350&isbn=9782205006933&author=Morris%2C+%281923-2001%29&title=Le+grand+duc+%2F+%5BLivre%5D+%2F+dessins+de+Morris+%3B+sc%C3%A9nario+de+Goscinny&year=1999&publisher=Dargaud&TypeOfDocument=LyonPhysicalDocument&mat=bande_dessinees&ct=true&size=512&isPhysical=1")
                 .method("GET", null)
                 .build();
-        Response imageResponse = imageClient.newCall(imageRequest).execute();
+        Response imageResponse;
 
 
 
@@ -121,9 +121,10 @@ public class Scraping {
         String titre = "";
         String serie = "";
         String numero = "";
-        String image = "";
         String creator = "";
         String creatorbis = "";
+
+        String image = "";
 
 
         for (int i = 1 ; i <= /*maxPage*/8 ; i++){
@@ -137,7 +138,6 @@ public class Scraping {
             response = client.newCall(request).execute();
             txt = response.body().string();
             json = new JSONObject(txt);
-            //System.out.println(json.getJSONObject("resultSet"));
             jarr = json.getJSONArray("resultSet");
 
             for(int j = 0; j < jarr.length(); j++){
@@ -148,7 +148,7 @@ public class Scraping {
 
                 id = p.getString("value");
 
-                System.out.println("https://catalogue.bm-lyon.fr/in/rest/api/notice?id="+id);
+                //System.out.println("https://catalogue.bm-lyon.fr/in/rest/api/notice?id="+id);
 
                 noticeRequest = new Request.Builder()
                         .url("https://catalogue.bm-lyon.fr/in/rest/api/notice?id="+id)
