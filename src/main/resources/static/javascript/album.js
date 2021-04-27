@@ -19,6 +19,8 @@ $(document).ready(function() {
             url = url+"byAuteur?auteur="+search;
         }else if(res == "serie"){
             url = url+"bySerie?serie="+search;
+        }else if(res == "all"){
+            url = url+"all";
         }else{
             alert("error")
         }
@@ -28,33 +30,65 @@ $(document).ready(function() {
         })
             .then(response => response.json())
             .then(result => {
-                var tr = $("<tr></tr>");
+                if (res == "all") {
+                    result.forEach(result => {
+                        var tr = $("<tr></tr>");
 
-                var td = $("<td>Titre</td>").text(result["titre"]);
-                tr.append(td);
-                td = $("<td>Serie</td>").text(result["serie"]);
-                tr.append(td);
-                td = $("<td>format</td>").text(result["format"]);
-                tr.append(td);
-                td = $("<td>type</td>").text(result["type"]);
-                tr.append(td);
-                td = $("<td>isbn</td>").text(result["isbn"]);
-                tr.append(td);
-                td = $("<td>ordre</td>").text(result["ordre"]);
-                tr.append(td);
-                td = $("<td>image</td>").text(result["image"]);
-                tr.append(td);
-                td = $("<td>auteur</td>").text(result["auteurs"]);
-                tr.append(td);
-                resFinal = result;
+                        var td = $("<td>Titre</td>").text(result["titre"]);
+                        tr.append(td);
+                        td = $("<td>Serie</td>").text(result["serie"]);
+                        tr.append(td);
+                        td = $("<td>format</td>").text(result["format"]);
+                        tr.append(td);
+                        td = $("<td>type</td>").text(result["type"]);
+                        tr.append(td);
+                        td = $("<td>isbn</td>").text(result["isbn"]);
+                        tr.append(td);
+                        td = $("<td>ordre</td>").text(result["ordre"]);
+                        tr.append(td);
+                        td = $("<td>image</td>").text(result["image"]);
+                        tr.append(td);
+                        td = $("<td>auteur</td>").text(result["auteurs"]);
+                        tr.append(td);
+                        resFinal = result;
 
-                td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)'>add to favoris</button>\</td>");
-                tr.append(td);
-                td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)'>Suivre</button>\</td>");
-                tr.append(td);
-                td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)'>add to my collection</button>\</td>");
-                tr.append(td);
-                $("#table").append(tr);
+                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)'>add to favoris</button>\</td>");
+                        tr.append(td);
+                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)'>Suivre</button>\</td>");
+                        tr.append(td);
+                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)'>add to my collection</button>\</td>");
+                        tr.append(td);
+                        $("#table").append(tr)
+                    })
+                } else {
+                    var tr = $("<tr></tr>");
+
+                    var td = $("<td>Titre</td>").text(result["titre"]);
+                    tr.append(td);
+                    td = $("<td>Serie</td>").text(result["serie"]);
+                    tr.append(td);
+                    td = $("<td>format</td>").text(result["format"]);
+                    tr.append(td);
+                    td = $("<td>type</td>").text(result["type"]);
+                    tr.append(td);
+                    td = $("<td>isbn</td>").text(result["isbn"]);
+                    tr.append(td);
+                    td = $("<td>ordre</td>").text(result["ordre"]);
+                    tr.append(td);
+                    td = $("<td>image</td>").text(result["image"]);
+                    tr.append(td);
+                    td = $("<td>auteur</td>").text(result["auteurs"]);
+                    tr.append(td);
+                    resFinal = result;
+
+                    td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)'>add to favoris</button>\</td>");
+                    tr.append(td);
+                    td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)'>Suivre</button>\</td>");
+                    tr.append(td);
+                    td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)'>add to my collection</button>\</td>");
+                    tr.append(td);
+                    $("#table").append(tr)
+                }
             })
             .catch(error => console.log('error', error));
     }
