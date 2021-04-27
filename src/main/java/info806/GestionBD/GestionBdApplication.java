@@ -56,45 +56,31 @@ public class GestionBdApplication implements CommandLineRunner{
 	private UtilisateurController utilisateurController;
 
 
-	public static SerieRepository testS;
 	public static void main(String[] args) throws IOException, JSONException {
 		SpringApplication.run(GestionBdApplication.class, args);
-		//System.out.println(albumRepository.findAll().get(0));
-
-		var scrapingTool = new Scraping();
-		ArrayList<ArrayList<String>> list = scrapingTool.scraping();
-
 		System.out.println("hooey");
-
 	}
-
-	/*CommandLineRunner commandLineRunner(AlbumRepository albumRepository){
-		return args -> {
-			Album test = new Album(Genre.Action,12,"test","image", Format.BD,1);
-			albumRepository.save(test);
-		};
-	}*/
 
 	@Override
 	public void run(String... args) throws Exception {
 		//Create
+		var scrapingTool = new Scraping();
+		ArrayList<ArrayList<String>> list = scrapingTool.scraping();
 
-
-
-		/*ArrayList<Album> listAlbum = new ArrayList<Album>();
+		ArrayList<Album> listAlbum = new ArrayList<Album>();
 		ArrayList<Auteur> listAuteur = new ArrayList<Auteur>();
 		ArrayList<Serie> listSerie = new ArrayList<Serie>();
-		List temp;*/
-		/*for(int i = 0; i<list.size(); i++){
+		ArrayList<String> temp;
+		for(int i = 0; i<list.size(); i++){
 			temp = list.get(i);
 			listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), 0));
 			listAuteur.add(new Auteur(temp.get(6),""));
 			if(temp.get(7) != ""){listAuteur.add(new Auteur(temp.get(7),""));}
 			if(temp.get(8) != ""){listSerie.add(new Serie("",temp.get(8),"",0,""));}
-		}*/
-		/*albumController.createListAlbum(listAlbum);
+		}
+		albumController.createListAlbum(listAlbum);
 		auteurController.createListAuteur(listAuteur);
-		serieController.createListSerie(listSerie);*/
+		serieController.createListSerie(listSerie);
 
 		//create test
 		/*albumController.create();

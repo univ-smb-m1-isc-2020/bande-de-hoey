@@ -133,7 +133,6 @@ public class Scraping {
 
                 txt = noticeResponse.body().string();
                 json = new JSONObject(txt);
-                System.out.println(json);
 
                 JSONArray fields = json.getJSONArray("fields");
                 for(int k = 0; k < fields.length(); k++){
@@ -212,7 +211,7 @@ public class Scraping {
                 listData.add(tempList);
 
                 //Clear tempList
-                tempList.clear();
+                tempList = new ArrayList<>();
 
                 isbn = "";
                 titre = "";
@@ -223,7 +222,6 @@ public class Scraping {
                 creatorbis = "";
             }
         }
-
         return listData;
     }
 
