@@ -17,6 +17,8 @@ $(document).ready(function() {
             url = url+"bySerie?serie="+search;
         }else if(res == "album"){
             url = url+"byAlbum?album="+search;
+        }else if(res == "all"){
+            url = url+"all";
         }else{
             alert("error")
         }
@@ -26,25 +28,50 @@ $(document).ready(function() {
         })
             .then(response => response.json())
             .then(result => {
-                console.log(result);
-                var tr = $("<tr></tr>");
+                if(res == "all"){
+                    result.forEach(result => {
+                        console.log(result);
+                        var tr = $("<tr></tr>");
 
-                var td = $("<td>Titre</td>").text(result["nom"]);
-                tr.append(td);
-                td = $("<td>Serie</td>").text(result["prenom"]);
-                tr.append(td);
-                td = $("<td>format</td>").text(result["series"]);
-                tr.append(td);
-                td = $("<td>type</td>").text(result["albums"]);
-                tr.append(td);
-                resFinal = result;
-                td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)' >add to favoris</button>\</td>");
-                tr.append(td);
-                td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)' >add to suivis</button>\</td>");
-                tr.append(td);
-                td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)' >add to collection</button>\</td>");
-                tr.append(td);
-                $("#table").append(tr);
+                        var td = $("<td>Titre</td>").text(result["nom"]);
+                        tr.append(td);
+                        td = $("<td>Serie</td>").text(result["prenom"]);
+                        tr.append(td);
+                        td = $("<td>format</td>").text(result["series"]);
+                        tr.append(td);
+                        td = $("<td>type</td>").text(result["albums"]);
+                        tr.append(td);
+                        resFinal = result;
+                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)' >add to favoris</button>\</td>");
+                        tr.append(td);
+                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)' >add to suivis</button>\</td>");
+                        tr.append(td);
+                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)' >add to collection</button>\</td>");
+                        tr.append(td);
+                        $("#table").append(tr);
+                    })
+                }else {
+                    console.log(result);
+                    var tr = $("<tr></tr>");
+
+                    var td = $("<td>Titre</td>").text(result["nom"]);
+                    tr.append(td);
+                    td = $("<td>Serie</td>").text(result["prenom"]);
+                    tr.append(td);
+                    td = $("<td>format</td>").text(result["series"]);
+                    tr.append(td);
+                    td = $("<td>type</td>").text(result["albums"]);
+                    tr.append(td);
+                    resFinal = result;
+                    td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)' >add to favoris</button>\</td>");
+                    tr.append(td);
+                    td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)' >add to suivis</button>\</td>");
+                    tr.append(td);
+                    td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)' >add to collection</button>\</td>");
+                    tr.append(td);
+                    $("#table").append(tr);
+                }
+
             })
             .catch(error => console.log('error', error));
     }
