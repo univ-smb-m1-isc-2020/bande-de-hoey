@@ -82,7 +82,7 @@ public class GestionBdApplication implements CommandLineRunner{
 				listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), Integer.parseInt(temp.get(5).replaceAll("\\s+","")) ));
 			}
 			if(temp.get(6) != ""){
-				fooAuteur = temp.get(6).split("|");
+				fooAuteur = temp.get(6).split("\\|");
 				if (fooAuteur.length>1){
 					listAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
 					tempAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
