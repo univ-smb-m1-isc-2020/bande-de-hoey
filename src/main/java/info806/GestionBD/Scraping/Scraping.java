@@ -41,6 +41,8 @@ public class Scraping {
 
     public Scraping(){}
 
+    public static void main(String[] args) throws JSONException, IOException { Scraping scrap = new Scraping(); scrap.scraping(); }
+
     public  ArrayList<ArrayList<String>> scraping() throws JSONException, IOException{
         ArrayList<String> tempList = new ArrayList<String>();
         ArrayList<ArrayList<String>> listData = new ArrayList<ArrayList<String>>();
@@ -138,20 +140,69 @@ public class Scraping {
                 for(int k = 0; k < fields.length(); k++){
                     JSONObject o = (JSONObject)fields.get(k);
                     String name = o.getString("name");
+                    String[] foo;
                     switch (name){
                         default:
                             break;
                         case "creator":
-                            creator = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer");
+                            foo = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split(",");
+                            for(int h = 0; h < foo.length; h++){
+                                foo [h] = foo[h].replaceAll("\\s+","");
+                            }
+                            if(foo[foo.length-1].matches("^\\(.*")){
+                                switch (foo.length){
+                                    case 3:
+                                        creator = foo[0]+"|"+foo[1];
+                                        break;
+                                    case 2:
+                                        creator = foo[0];
+                                        break;
+                                    case 1:
+                                        creator = foo[0];
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }else{
+                                for (var v : foo){
+                                    creator += v+"|";
+                                }
+                                creator = creator.substring(0, creator.length() - 1);
+                            }
                             break;
                         case "title":
                             titre = ((((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split("\\[|\\/"))[0];
+                            titre = titre.substring(0, titre.length() - 1);
                             break;
                         case "creatorOther":
-                            creatorbis = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer");
+                            foo = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split(",");
+                            for(int h = 0; h < foo.length; h++){
+                                foo [h] = foo[h].replaceAll("\\s+","");
+                            }
+                            if(foo[foo.length-1].matches("^\\(.*")){
+                                switch (foo.length){
+                                    case 3:
+                                        creatorbis = foo[0]+"|"+foo[1];
+                                        break;
+                                    case 2:
+                                        creatorbis = foo[0];
+                                        break;
+                                    case 1:
+                                        creatorbis = foo[0];
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }else{
+                                for (var v : foo){
+                                    creatorbis += v+"|";
+                                }
+                                creatorbis = creatorbis.substring(0, creatorbis.length() - 1);
+                            }
+                            //creatorbis = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer");
                             break;
                         case "relationSet":
-                            String[]foo = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split(";");
+                            foo = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split(";");
                             if(foo.length>=2){
                                 serie = foo[0];
                                 numero = foo[1];
@@ -172,12 +223,7 @@ public class Scraping {
                         default:
                             break;
                         case "imageSource_512":
-                            imageRequest = new Request.Builder()
-                                    .url("https://catalogue.bm-lyon.fr"+o.getString("value"))
-                                    .method("GET", null)
-                                    .build();
-                            imageResponse = imageClient.newCall(imageRequest).execute();
-
+                            image = "https://catalogue.bm-lyon.fr"+o.getString("value");
                             //
                             // IMAGE
                             /*
@@ -186,7 +232,6 @@ public class Scraping {
                             imagetest = ImageIO.read(url);
                             ImageIO.write((RenderedImage) imagetest, "jpg", new File("C:\\Users\\Admin\\Pictures\\image.jpg"));
                             System.out.println(imageResponse.body().string());*/
-
                             break;
                     }
                 }

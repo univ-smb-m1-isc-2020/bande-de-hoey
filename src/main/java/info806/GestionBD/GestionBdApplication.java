@@ -71,12 +71,43 @@ public class GestionBdApplication implements CommandLineRunner{
 		ArrayList<Auteur> listAuteur = new ArrayList<Auteur>();
 		ArrayList<Serie> listSerie = new ArrayList<Serie>();
 		ArrayList<String> temp;
+		ArrayList<Auteur> tempAuteur = new ArrayList<Auteur>();
+		String[]fooAuteur;
 		for(int i = 0; i<list.size(); i++){
 			temp = list.get(i);
-			listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), 0));
-			listAuteur.add(new Auteur(temp.get(6),""));
-			if(temp.get(7) != ""){listAuteur.add(new Auteur(temp.get(7),""));}
-			if(temp.get(8) != ""){listSerie.add(new Serie("",temp.get(8),"",0,""));}
+			if(temp.get(5)==""){
+				listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), -1));
+			}else{
+				listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), Integer.getInteger(temp.get(5)) ));
+			}
+			if(temp.get(6) != ""){
+				fooAuteur = temp.get(6).split("|");
+				if (fooAuteur.length>1){
+					listAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
+					tempAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
+				}else{
+					listAuteur.add(new Auteur(fooAuteur[0],""));
+					tempAuteur.add(new Auteur(fooAuteur[0],""));
+				}
+			}
+			if(temp.get(7) != ""){
+				fooAuteur = temp.get(7).split("|");
+				if (fooAuteur.length>1){
+					listAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
+					tempAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
+				}else{
+					listAuteur.add(new Auteur(fooAuteur[0],""));
+					tempAuteur.add(new Auteur(fooAuteur[0],""));
+				}
+			}
+			if(tempAuteur.size()!=0){
+				listAlbum.get(listAlbum.size()-1).setAuteurs(tempAuteur);
+				tempAuteur = new ArrayList<Auteur>();
+			}
+			if(temp.get(8) != ""){
+				listSerie.add(new Serie("",temp.get(8),"",0,""));
+				listAlbum.get(listAlbum.size()-1).setSerie(new Serie("",temp.get(8),"",0,""));
+			}
 		}
 		albumController.createListAlbum(listAlbum);
 		auteurController.createListAuteur(listAuteur);
