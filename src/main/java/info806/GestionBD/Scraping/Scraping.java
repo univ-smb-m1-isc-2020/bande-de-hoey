@@ -41,9 +41,9 @@ public class Scraping {
 
     public Scraping(){}
 
-    public  ArrayList<List> scraping() throws JSONException, IOException{
-        List tempList = new List();
-        ArrayList<List> listData = new ArrayList<List>();
+    public  ArrayList<ArrayList<String>> scraping() throws JSONException, IOException{
+        ArrayList<String> tempList = new ArrayList<String>();
+        ArrayList<ArrayList<String>> listData = new ArrayList<ArrayList<String>>();
         //SEARCH
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .connectTimeout(10, TimeUnit.SECONDS)
@@ -212,7 +212,7 @@ public class Scraping {
                 listData.add(tempList);
 
                 //Clear tempList
-                tempList.removeAll();
+                tempList.clear();
 
                 isbn = "";
                 titre = "";

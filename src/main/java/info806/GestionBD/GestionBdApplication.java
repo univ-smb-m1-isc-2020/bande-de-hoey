@@ -62,7 +62,7 @@ public class GestionBdApplication implements CommandLineRunner{
 		//System.out.println(albumRepository.findAll().get(0));
 
 		var scrapingTool = new Scraping();
-		ArrayList<List> list = scrapingTool.scraping();
+		ArrayList<ArrayList<String>> list = scrapingTool.scraping();
 
 		System.out.println("hooey");
 
@@ -87,10 +87,10 @@ public class GestionBdApplication implements CommandLineRunner{
 		List temp;*/
 		/*for(int i = 0; i<list.size(); i++){
 			temp = list.get(i);
-			listAlbum.add(new Album(temp.getItem(0), temp.getItem(1), temp.getItem(2), temp.getItem(3), temp.getItem(4), 0));
-			listAuteur.add(new Auteur(temp.getItem(6),""));
-			if(temp.getItem(7) != ""){listAuteur.add(new Auteur(temp.getItem(7),""));}
-			if(temp.getItem(8) != ""){listSerie.add(new Serie("",temp.getItem(8),"",0,""));}
+			listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), 0));
+			listAuteur.add(new Auteur(temp.get(6),""));
+			if(temp.get(7) != ""){listAuteur.add(new Auteur(temp.get(7),""));}
+			if(temp.get(8) != ""){listSerie.add(new Serie("",temp.get(8),"",0,""));}
 		}*/
 		/*albumController.createListAlbum(listAlbum);
 		auteurController.createListAuteur(listAuteur);
