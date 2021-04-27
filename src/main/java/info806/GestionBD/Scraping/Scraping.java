@@ -205,7 +205,10 @@ public class Scraping {
                             foo = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split(";");
                             if(foo.length>=2){
                                 serie = foo[0];
-                                numero = foo[1];
+                                numero = foo[1].replaceAll("\\s+","");
+                                if(numero.matches(".*[a-z].*") || numero.matches(".*[A-Z].*")){
+                                    numero = "";
+                                }
                             }else{
                                 serie = foo[0];
                             }

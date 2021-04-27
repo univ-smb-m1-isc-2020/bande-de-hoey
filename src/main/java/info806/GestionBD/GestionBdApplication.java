@@ -75,10 +75,11 @@ public class GestionBdApplication implements CommandLineRunner{
 		String[]fooAuteur;
 		for(int i = 0; i<list.size(); i++){
 			temp = list.get(i);
-			if(temp.get(5)==""){
+			if(temp.get(5)=="" || temp.get(5)==null){
 				listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), -1));
 			}else{
-				listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), Integer.getInteger(temp.get(5)) ));
+				System.out.println(temp.get(5));
+				listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), Integer.parseInt(temp.get(5).replaceAll("\\s+","")) ));
 			}
 			if(temp.get(6) != ""){
 				fooAuteur = temp.get(6).split("|");
@@ -91,7 +92,7 @@ public class GestionBdApplication implements CommandLineRunner{
 				}
 			}
 			if(temp.get(7) != ""){
-				fooAuteur = temp.get(7).split("|");
+				fooAuteur = temp.get(7).split("\\|");
 				if (fooAuteur.length>1){
 					listAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
 					tempAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
@@ -106,12 +107,13 @@ public class GestionBdApplication implements CommandLineRunner{
 			}
 			if(temp.get(8) != ""){
 				listSerie.add(new Serie("",temp.get(8),"",0,""));
-				listAlbum.get(listAlbum.size()-1).setSerie(new Serie("",temp.get(8),"",0,""));
+				//listAlbum.get(listAlbum.size()-1).setSerie(new Serie("",temp.get(8),"",0,""));
 			}
 		}
-		albumController.createListAlbum(listAlbum);
 		auteurController.createListAuteur(listAuteur);
 		serieController.createListSerie(listSerie);
+		albumController.createListAlbum(listAlbum);
+
 
 		//create test
 		/*albumController.create();

@@ -58,7 +58,8 @@ public class Album {
     private String titre;
 
     @Column(
-            name = "image"
+            name = "image",
+            length=10485760
     )
     private String image;
 
