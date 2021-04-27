@@ -80,6 +80,11 @@ public class AlbumController {
         albumService.create(listAlbum);
     }
 
+    @PostMapping(path = "createListAlbum")
+    public void createListAlbum(ArrayList<Album> listAlbum){
+        albumService.create(listAlbum);
+    }
+
     @PostMapping(path = "createBertrand")
     public void createBertrand(Album album){
         albumService.createBertrand(album);

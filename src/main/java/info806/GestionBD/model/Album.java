@@ -58,7 +58,8 @@ public class Album {
     private String titre;
 
     @Column(
-            name = "image"
+            name = "image",
+            length=10485760
     )
     private String image;
 
@@ -78,7 +79,7 @@ public class Album {
     @JoinColumn(name = "auteurs", referencedColumnName = "id")
     private List<Auteur> auteurs = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "serie", referencedColumnName = "id")
     private Serie serie;
 

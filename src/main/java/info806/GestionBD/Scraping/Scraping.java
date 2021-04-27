@@ -1,6 +1,7 @@
 package info806.GestionBD.Scraping;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
+import info806.GestionBD.model.Album;
 import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import okhttp3.OkHttpClient;
 import okhttp3.MediaType;
@@ -13,8 +14,11 @@ import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import javax.imageio.ImageIO;
@@ -23,6 +27,7 @@ import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
@@ -34,42 +39,13 @@ public class Scraping {
     static final String URL_NOTICE = "https://catalogue.bm-lyon.fr/in/rest/api/notice?";
 
 
-    /*
-     peux visualiser une album (ISBN, titre, image série, numéro d'ordre pour la série, genre, format), une série (liste des albums appartenant a la série par ordre dans la série)
-    je peux rechercher des bandes dessinée par auteur / série / titre / isbn,
-    je peux marquer un album comm faisant partie de ma collection
-    je peux marquer une série, un auteur comme suivie.
+    public Scraping(){}
 
-    */
+    public static void main(String[] args) throws JSONException, IOException { Scraping scrap = new Scraping(); scrap.scraping(); }
 
-    public static void main(String[] args) throws JSONException, IOException {
-
-        /*
-        String bodytext = "{\"queryid\":\"fb33204c-acff-4451-98c0-2b5847179e5d\",\"advancedQuery\":{\"limitClause\":\"ZMAT:\\\"bande_dessinees\\\" languageLimit_s:\\\"fre\\\"\",\"pageSize\":10,\"searchContext\":\"advancedsearch\",\"searchType\":\"all\",\"section\":\"*\",\"sort\":\"score\",\"terms\":[]},\"mappedFQ\":{},\"includeFacets\":true,\"sf\":\"*\",\"order\":\"score\",\"pageSize\":8,\"locale\":\"fr\"}";
-        JSONObject json = new JSONObject(bodytext);
-        System.out.println(json);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        MappingJackson2HttpMessageConverter jsonHttpMessageConverter = new MappingJackson2HttpMessageConverter();
-        jsonHttpMessageConverter.getObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        restTemplate.getMessageConverters().add(jsonHttpMessageConverter);
-
-        // Data attached to the request.
-        HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
-
-        // Send request with POST method.
-        JSONObject e = restTemplate.postForObject(URL_SEARCH, requestBody, JSONObject.class);
-        */
-
-
-
-
-
+    public  ArrayList<ArrayList<String>> scraping() throws JSONException, IOException{
+        ArrayList<String> tempList = new ArrayList<String>();
+        ArrayList<ArrayList<String>> listData = new ArrayList<ArrayList<String>>();
         //SEARCH
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .connectTimeout(10, TimeUnit.SECONDS)
@@ -159,29 +135,80 @@ public class Scraping {
 
                 txt = noticeResponse.body().string();
                 json = new JSONObject(txt);
-                System.out.println(json);
 
                 JSONArray fields = json.getJSONArray("fields");
                 for(int k = 0; k < fields.length(); k++){
                     JSONObject o = (JSONObject)fields.get(k);
                     String name = o.getString("name");
+                    String[] foo;
                     switch (name){
                         default:
                             break;
                         case "creator":
-                            creator = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer");
+                            foo = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split(",");
+                            for(int h = 0; h < foo.length; h++){
+                                foo [h] = foo[h].replaceAll("\\s+","");
+                            }
+                            if(foo[foo.length-1].matches("^\\(.*")){
+                                switch (foo.length){
+                                    case 3:
+                                        creator = foo[0]+"|"+foo[1];
+                                        break;
+                                    case 2:
+                                        creator = foo[0];
+                                        break;
+                                    case 1:
+                                        creator = foo[0];
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }else{
+                                for (var v : foo){
+                                    creator += v+"|";
+                                }
+                                creator = creator.substring(0, creator.length() - 1);
+                            }
                             break;
                         case "title":
                             titre = ((((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split("\\[|\\/"))[0];
+                            titre = titre.substring(0, titre.length() - 1);
                             break;
                         case "creatorOther":
-                            creatorbis = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer");
+                            foo = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split(",");
+                            for(int h = 0; h < foo.length; h++){
+                                foo [h] = foo[h].replaceAll("\\s+","");
+                            }
+                            if(foo[foo.length-1].matches("^\\(.*")){
+                                switch (foo.length){
+                                    case 3:
+                                        creatorbis = foo[0]+"|"+foo[1];
+                                        break;
+                                    case 2:
+                                        creatorbis = foo[0];
+                                        break;
+                                    case 1:
+                                        creatorbis = foo[0];
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }else{
+                                for (var v : foo){
+                                    creatorbis += v+"|";
+                                }
+                                creatorbis = creatorbis.substring(0, creatorbis.length() - 1);
+                            }
+                            //creatorbis = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer");
                             break;
                         case "relationSet":
-                            String[]foo = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split(";");
+                            foo = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split(";");
                             if(foo.length>=2){
                                 serie = foo[0];
-                                numero = foo[1];
+                                numero = foo[1].replaceAll("\\s+","");
+                                if(numero.matches(".*[a-z].*") || numero.matches(".*[A-Z].*")){
+                                    numero = "";
+                                }
                             }else{
                                 serie = foo[0];
                             }
@@ -199,12 +226,7 @@ public class Scraping {
                         default:
                             break;
                         case "imageSource_512":
-                            imageRequest = new Request.Builder()
-                                    .url("https://catalogue.bm-lyon.fr"+o.getString("value"))
-                                    .method("GET", null)
-                                    .build();
-                            imageResponse = imageClient.newCall(imageRequest).execute();
-
+                            image = "https://catalogue.bm-lyon.fr"+o.getString("value");
                             //
                             // IMAGE
                             /*
@@ -213,13 +235,31 @@ public class Scraping {
                             imagetest = ImageIO.read(url);
                             ImageIO.write((RenderedImage) imagetest, "jpg", new File("C:\\Users\\Admin\\Pictures\\image.jpg"));
                             System.out.println(imageResponse.body().string());*/
-
                             break;
                     }
                 }
 
 
                 System.out.println("Titre : "+titre+"\nISBN : "+isbn+"\nCreator : "+creator+"\nCreatorBis : "+creatorbis+"\nSerie : "+serie+"\nNuméro : "+numero);
+
+                //tempList Add Album
+                tempList.add("");
+                tempList.add(isbn);
+                tempList.add(titre);
+                tempList.add(image);
+                tempList.add("");
+                tempList.add(numero);
+
+                //tempList Add other
+                tempList.add(creator);
+                tempList.add(creatorbis);
+                tempList.add(serie);
+
+                //Add tempList to listAlbum
+                listData.add(tempList);
+
+                //Clear tempList
+                tempList = new ArrayList<>();
 
                 isbn = "";
                 titre = "";
@@ -228,10 +268,9 @@ public class Scraping {
                 image = "";
                 creator = "";
                 creatorbis = "";
-
             }
         }
-
+        return listData;
     }
 
 }
