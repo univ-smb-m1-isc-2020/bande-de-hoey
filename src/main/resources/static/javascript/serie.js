@@ -60,16 +60,20 @@ $(document).ready(function() {
                         resFinal = result;
                         globalTab.push(result);
 
-                        td = $("<td>\<button onclick='addSerie(resFinal,fav,globalTab[incrIDbutton])' >add to favoris</button>\</td>");
+                        var ids = incrIDbutton.toString();
+                        td = $("<td>\<button onclick='addSerie(resFinal,fav,globalTab[incrIDbutton],this.id)' >add to favoris</button>\</td>");
                         td.attr('id', incrIDbutton);
+                        td.children().attr('id', incrIDbutton)
                         incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,suiv,globalTab[incrIDbutton])' >add to suivis</button>\</td>");
+                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,suiv,globalTab[incrIDbutton],this.id)' >add to suivis</button>\</td>");
                         td.attr('id', incrIDbutton);
+                        td.children().attr('id', incrIDbutton)
                         incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,coll,globalTab[incrIDbutton])' >add to collections</button>\</td>");
+                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,coll,globalTab[incrIDbutton],this.id)' >add to collections</button>\</td>");
                         td.attr('id', incrIDbutton);
+                        td.children().attr('id', incrIDbutton)
                         incrIDbutton+=1;
                         tr.append(td);
                         $("#table").append(tr);
@@ -110,8 +114,9 @@ $(document).ready(function() {
 
 });
 
-function addSerie(serie,to,foo){
+function addSerie(serie,to,foo,but){
     console.log( foo );
+    console.log( "but : " + but );
 
     var url = "http://localhost:8080/utilisateur/addSerieTo";
     if(to=='favoris'){
