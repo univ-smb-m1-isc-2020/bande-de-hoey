@@ -172,7 +172,11 @@ public class Scraping {
                             break;
                         case "title":
                             titre = ((((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split("\\[|\\/"))[0];
-                            titre = titre.substring(0, titre.length() - 1);
+                            if(titre.length()>1){
+                                titre = titre.substring(0, titre.length() - 1);
+                            }else{
+                                titre = "";
+                            }
                             break;
                         case "creatorOther":
                             foo = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split(",");
