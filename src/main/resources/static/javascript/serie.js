@@ -62,15 +62,15 @@ $(document).ready(function() {
                         globalTab.push(result);
 
                         td = $("<td>\<button onclick='addSerie(resFinal,fav,)' >add to favoris</button>\</td>");
-                        td.attr('id', 'but-test' + incrIDbutton);
+                        td.attr('id', incrIDbutton);
                         incrIDbutton+=1;
                         tr.append(td);
                         td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,suiv,)' >add to suivis</button>\</td>");
-                        td.attr('id', 'but-test' + incrIDbutton);
+                        td.attr('id', incrIDbutton);
                         incrIDbutton+=1;
                         tr.append(td);
                         td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,coll,)' >add to collections</button>\</td>");
-                        td.attr('id', 'but-test' + incrIDbutton);
+                        td.attr('id', incrIDbutton);
                         incrIDbutton+=1;
                         tr.append(td);
                         $("#table").append(tr);
@@ -112,7 +112,7 @@ $(document).ready(function() {
 });
 
 function addSerie(serie,to){
-    console.log( globalTab[Number.parseInt( ($(this).attr('id')).slice(-1), 10)] );
+    console.log( globalTab[Number.parseInt( $(this).attr('id'), 10)] );
 
     var url = "http://localhost:8080/utilisateur/addSerieTo";
     if(to=='favoris'){
