@@ -1,4 +1,5 @@
-
+let incrIDbutton = 0;
+let globalTab = [];
 let resFinal ;
 const fav = "favoris";
 const suiv = "suivis";
@@ -31,22 +32,23 @@ $(document).ready(function() {
                 if(res == "all"){
                     result.forEach(result => {
                         console.log(result);
-                        var tr = $("<tr></tr>");
-
-                        var td = $("<td>Titre</td>").text(result["nom"]);
-                        tr.append(td);
-                        td = $("<td>Serie</td>").text(result["prenom"]);
-                        tr.append(td);
-                        td = $("<td>format</td>").text(result["series"]);
-                        tr.append(td);
-                        td = $("<td>type</td>").text(result["albums"]);
-                        tr.append(td);
                         resFinal = result;
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)' >add to favoris</button>\</td>");
+                        globalTab.push(result);
+                        globalTab.push(result);
+                        globalTab.push(result);
+
+                        var ids = incrIDbutton.toString();
+                        td = $("<td>\<button onclick='addSerie(globalTab[this.id],fav)' >add to favoris</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)' >add to suivis</button>\</td>");
+                        td = $("<td>\<button  onclick='addSerie(globalTab[this.id],suiv)' >add to suivis</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)' >add to collection</button>\</td>");
+                        td = $("<td>\<button onclick='addSerie(globalTab[this.id],coll)' >add to collections</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
                         $("#table").append(tr);
                     })
