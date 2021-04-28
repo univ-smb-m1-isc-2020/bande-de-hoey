@@ -82,22 +82,52 @@ public class UtilisateurController {
         utilisateurService.delete(user);
     }
 
+    //Serie
     @PostMapping(path = "addSerieToFavoris")
     public void addSerieToFavoris(@RequestBody Serie serie){
-        System.out.println(serie);
         utilisateurService.addSerieToFavoris(serie);
     }
 
+    @PostMapping(path = "addSerieToSuivis")
+    public void addSerieToSuivis(@RequestBody Serie serie){
+        utilisateurService.addSerieToSuivis(serie);
+    }
+
+    @PostMapping(path = "addSerieToCollections")
+    public void addSerieToCollections(@RequestBody Serie serie){
+        utilisateurService.addSerieToCollections(serie);
+    }
+
+    //Auteur
+    @PostMapping(path = "addAuteurToFavoris")
+    public void addAlbumToFavoris(@RequestBody Auteur auteur){
+        utilisateurService.addAuteurToFavoris(auteur);
+    }
+
+    @PostMapping(path = "addAuteurToSuivis")
+    public void addAlbumToSuivis(@RequestBody Auteur auteur){
+        utilisateurService.addAuteurToSuivis(auteur);
+    }
+
+    @PostMapping(path = "addAuteurToCollections")
+    public void addAlbumToCollections(@RequestBody Auteur auteur){
+        utilisateurService.addAuteurToCollection(auteur);
+    }
+    //Album
     @PostMapping(path = "addAlbumToFavoris")
     public void addAlbumToFavoris(@RequestBody Album album){
-        System.out.println(album);
         utilisateurService.addAlbumToFavoris(album);
     }
 
-    @PostMapping(path = "addAuteurToFavoris")
-    public void addAlbumToFavoris(@RequestBody Auteur auteur){
-        System.out.println(auteur);
-        utilisateurService.addAuteurToFavoris(auteur);
+    @PostMapping(path = "addAlbumToSuivis")
+    public void addAlbumToSuivis(@RequestBody Album album){
+        utilisateurService.addAlbumToSuivis(album);
     }
+
+    @PostMapping(path = "addAlbumToCollections")
+    public void addAlbumToCollections(@RequestBody Album album){
+        utilisateurService.addAlbumToCollections(album);
+    }
+
 
 }

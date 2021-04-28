@@ -42,6 +42,11 @@ public class SerieController {
         serieService.create(listSerie);
     }
 
+    @PostMapping(path = "createListSerie")
+    public void createListSerie(ArrayList<Serie> listSerie){
+        serieService.create(listSerie);
+    }
+
     // Get
     @GetMapping(path = "byTitle")
     public Serie getByTitle(@RequestParam(value = "title") String title) {

@@ -1,5 +1,6 @@
 package info806.GestionBD;
 
+import info806.GestionBD.Scraping.Scraping;
 import info806.GestionBD.api.AlbumController;
 import info806.GestionBD.api.AuteurController;
 import info806.GestionBD.api.SerieController;
@@ -16,6 +17,7 @@ import info806.GestionBD.repositories.SerieRepository;
 import info806.GestionBD.repositories.UtilisateurRepository;
 import info806.GestionBD.service.AlbumService;
 import info806.GestionBD.service.AuteurService;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,8 +27,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 /*@ComponentScan({"info806.GestionBD.api", "info806.GestionBD.repositories"})
 @EnableJpaRepositories("info806.GestionBD.repositories")*/
@@ -52,28 +55,71 @@ public class GestionBdApplication implements CommandLineRunner{
 	@Autowired
 	private UtilisateurController utilisateurController;
 
-	public static SerieRepository testS;
-	public static void main(String[] args) {
+
+	public static void main(String[] args) throws IOException, JSONException {
 		SpringApplication.run(GestionBdApplication.class, args);
-		//System.out.println(albumRepository.findAll().get(0));
 		System.out.println("hooey");
-
 	}
-
-	/*CommandLineRunner commandLineRunner(AlbumRepository albumRepository){
-		return args -> {
-			Album test = new Album(Genre.Action,12,"test","image", Format.BD,1);
-			albumRepository.save(test);
-		};
-	}*/
 
 	@Override
 	public void run(String... args) throws Exception {
 		//Create
-		albumController.create();
+		var scrapingTool = new Scraping();
+		ArrayList<ArrayList<String>> list = scrapingTool.scraping();
+
+		ArrayList<Album> listAlbum = new ArrayList<Album>();
+		ArrayList<Auteur> listAuteur = new ArrayList<Auteur>();
+		ArrayList<Serie> listSerie = new ArrayList<Serie>();
+		ArrayList<String> temp;
+		ArrayList<Auteur> tempAuteur = new ArrayList<Auteur>();
+		String[]fooAuteur;
+		for(int i = 0; i<list.size(); i++){
+			temp = list.get(i);
+			if(temp.get(5)=="" || temp.get(5)==null){
+				listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), -1));
+			}else{
+				System.out.println(temp.get(5));
+				listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), Integer.parseInt(temp.get(5).replaceAll("\\s+","")) ));
+			}
+			if(temp.get(6) != ""){
+				fooAuteur = temp.get(6).split("\\|");
+				if (fooAuteur.length>1){
+					listAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
+					tempAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
+				}else{
+					listAuteur.add(new Auteur(fooAuteur[0],""));
+					tempAuteur.add(new Auteur(fooAuteur[0],""));
+				}
+			}
+			if(temp.get(7) != ""){
+				fooAuteur = temp.get(7).split("\\|");
+				if (fooAuteur.length>1){
+					listAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
+					tempAuteur.add(new Auteur(fooAuteur[0],fooAuteur[1]));
+				}else{
+					listAuteur.add(new Auteur(fooAuteur[0],""));
+					tempAuteur.add(new Auteur(fooAuteur[0],""));
+				}
+			}
+			if(tempAuteur.size()!=0){
+				listAlbum.get(listAlbum.size()-1).setAuteurs(tempAuteur);
+				tempAuteur = new ArrayList<Auteur>();
+			}
+			if(temp.get(8) != ""){
+				listSerie.add(new Serie("",temp.get(8),"",0,""));
+				//listAlbum.get(listAlbum.size()-1).setSerie(new Serie("",temp.get(8),"",0,""));
+			}
+		}
+		auteurController.createListAuteur(listAuteur);
+		serieController.createListSerie(listSerie);
+		albumController.createListAlbum(listAlbum);
+
+
+		//create test
+		/*albumController.create();
 		auteurController.create();
 		serieController.create();
-		utilisateurController.create();
+		utilisateurController.create();*/
 
 		//Add
 		/*var auteur = auteurController.getByName("clerc");
