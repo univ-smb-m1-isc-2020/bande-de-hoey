@@ -5,15 +5,62 @@
     <title>Profile</title>
     <title>Bande De Hoey</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/javascript/profile.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <link href="../static/css/header.css" rel="stylesheet" />
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
     <script>
         $(function(){
             $("#header").load("header.html");
         });
     </script>
 </head>
-<body>
+<body class="vh-100 vw-100">
+
 <div id="header"></div>
+
+<div class="d-flex justify-content-around w-100">
+    <button type="button" class="btn btn-secondary rounded-circle">deconnexion</button>
+
+    <button type="button" class="btn btn-danger">supprimer compte</button>
+</div>
+
+<div class="d-flex justify-content-around vw-100 vh-100">
+
+
+    <div class=" w-100 bg-danger flex-fill border">
+        <div class="text-uppercase font-italic d-flex justify-content-center">favoris</div>
+    </div>
+
+    <div class=" w-100 bg-warning flex-fill border">
+        <div class="text-uppercase font-italic d-flex justify-content-center">suivis</div>
+    </div>
+
+    <div class=" w-100 bg-success flex-fill border">
+        <div class="text-uppercase font-italic d-flex justify-content-center">collections</div>
+    </div>
+
+</div>
+<div class="d-flex justify-content-around vw-100 vh-100" >
+    <div class="border h-100">
+        element 1
+    </div>
+    <div class="border h-100">
+        element 2
+    </div>
+    <div class="border h-100">
+        element 3
+    </div>
+</div>
+
+
+
+
 </body>
 </html>
