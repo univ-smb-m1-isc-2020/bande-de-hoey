@@ -1,11 +1,12 @@
 let resFinal;
+let globalTab = [];
 const fav = "favoris";
 const suiv = "suivis";
 const coll = "collections";
 $(document).ready(function() {
 
     let incrIDbutton = 0;
-    let globalTab = [];
+
 
     function serie(){
 
@@ -56,17 +57,19 @@ $(document).ready(function() {
                         tr.append(td);
                         td = $("<td>type</td>").text(result["type"]);
                         tr.append(td);
+
                         resFinal = result;
                         globalTab.push(result);
-                        td = $("<td>\<button onclick='addSerie(resFinal,fav)' >add to favoris</button>\</td>");
+
+                        td = $("<td>\<button onclick='addSerie(resFinal,fav,)' >add to favoris</button>\</td>");
                         td.attr('id', 'but-test' + incrIDbutton);
                         incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,suiv)' >add to suivis</button>\</td>");
+                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,suiv,)' >add to suivis</button>\</td>");
                         td.attr('id', 'but-test' + incrIDbutton);
                         incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,coll)' >add to collections</button>\</td>");
+                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,coll,)' >add to collections</button>\</td>");
                         td.attr('id', 'but-test' + incrIDbutton);
                         incrIDbutton+=1;
                         tr.append(td);
@@ -109,6 +112,8 @@ $(document).ready(function() {
 });
 
 function addSerie(serie,to){
+    console.log( globalTab[Number.parseInt( ($(this).attr('id')).slice(-1), 10)] );
+
     var url = "http://localhost:8080/utilisateur/addSerieTo";
     if(to=='favoris'){
         url = url+"Favoris";
