@@ -3,6 +3,9 @@ const fav = "favoris";
 const suiv = "suivis";
 const coll = "collections";
 $(document).ready(function() {
+
+    let incrIDbutton = 0;
+
     function serie(){
 
         var res = document.getElementById("serie-select").value;
@@ -53,11 +56,17 @@ $(document).ready(function() {
                         td = $("<td>type</td>").text(result["type"]);
                         tr.append(td);
                         resFinal = result;
-                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,fav)' >add to favoris</button>\</td>");
+                        td = $("<td>\<button onclick='addSerie(resFinal,fav)' >add to favoris</button>\</td>");
+                        td.attr('id', 'but-test' + incrIDbutton);
+                        incrIDbutton+=1;
                         tr.append(td);
                         td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,suiv)' >add to suivis</button>\</td>");
+                        td.attr('id', 'but-test' + incrIDbutton);
+                        incrIDbutton+=1;
                         tr.append(td);
                         td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,coll)' >add to collections</button>\</td>");
+                        td.attr('id', 'but-test' + incrIDbutton);
+                        incrIDbutton+=1;
                         tr.append(td);
                         $("#table").append(tr);
                     })
