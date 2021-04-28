@@ -32,12 +32,22 @@ $(document).ready(function() {
                 if(res == "all"){
                     result.forEach(result => {
                         console.log(result);
+                        var tr = $("<tr></tr>");
+
+                        var td = $("<td>Titre</td>").text(result["nom"]);
+                        tr.append(td);
+                        td = $("<td>Serie</td>").text(result["prenom"]);
+                        tr.append(td);
+                        td = $("<td>format</td>").text(result["series"]);
+                        tr.append(td);
+                        td = $("<td>type</td>").text(result["albums"]);
+                        tr.append(td);
+
                         resFinal = result;
                         globalTab.push(result);
                         globalTab.push(result);
                         globalTab.push(result);
 
-                        var ids = incrIDbutton.toString();
                         td = $("<td>\<button onclick='addAuteur(globalTab[this.id],fav)' >add to favoris</button>\</td>");
                         td.children().attr('id', incrIDbutton)
                         incrIDbutton+=1;
