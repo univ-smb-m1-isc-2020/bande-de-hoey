@@ -59,6 +59,8 @@ $(document).ready(function() {
 
                         resFinal = result;
                         globalTab.push(result);
+                        globalTab.push(result);
+                        globalTab.push(result);
 
                         var ids = incrIDbutton.toString();
                         td = $("<td>\<button onclick='addSerie(resFinal,fav,globalTab[incrIDbutton],this.id)' >add to favoris</button>\</td>");
