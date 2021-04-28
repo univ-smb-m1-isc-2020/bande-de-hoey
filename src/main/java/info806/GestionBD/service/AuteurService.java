@@ -21,7 +21,19 @@ public class AuteurService {
     }
 
     public List<Auteur> getAllAuteurs(){
-        return auteurRepository.findAll();
+        var l = auteurRepository.findAll();
+        List<Auteur> res = new ArrayList<>();
+        res.add(l.get(0));
+        for(var i:l){
+            boolean canAdd = true;
+            for(var j:res){
+                if(i.getNom().matches(j.getNom()) && i.getPrenom().matches(j.getPrenom())){
+                    canAdd = false;
+                }
+            }
+            if(canAdd) res.add(i);
+        }
+        return res;
     }
 
     public List<Auteur> getByAlbum(String titre) {

@@ -1,4 +1,5 @@
-
+let incrIDbutton = 0;
+let globalTab = [];
 let resFinal ;
 const fav = "favoris";
 const suiv = "suivis";
@@ -41,12 +42,23 @@ $(document).ready(function() {
                         tr.append(td);
                         td = $("<td>type</td>").text(result["albums"]);
                         tr.append(td);
+
                         resFinal = result;
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)' >add to favoris</button>\</td>");
+                        globalTab.push(result);
+                        globalTab.push(result);
+                        globalTab.push(result);
+
+                        td = $("<td>\<button onclick='addAuteur(globalTab[this.id],fav)' >add to favoris</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)' >add to suivis</button>\</td>");
+                        td = $("<td>\<button  onclick='addAuteur(globalTab[this.id],suiv)' >add to suivis</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)' >add to collection</button>\</td>");
+                        td = $("<td>\<button onclick='addAuteur(globalTab[this.id],coll)' >add to collections</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
                         $("#table").append(tr);
                     })
@@ -63,11 +75,11 @@ $(document).ready(function() {
                     td = $("<td>type</td>").text(result["albums"]);
                     tr.append(td);
                     resFinal = result;
-                    td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)' >add to favoris</button>\</td>");
+                    td = $("<td>\<button id='but-test' onclick='addAuteur(resFinal,fav)' >add to favoris</button>\</td>");
                     tr.append(td);
-                    td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)' >add to suivis</button>\</td>");
+                    td = $("<td>\<button id='but-test' onclick='addAuteur(resFinal,suiv)' >add to suivis</button>\</td>");
                     tr.append(td);
-                    td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)' >add to collection</button>\</td>");
+                    td = $("<td>\<button id='but-test' onclick='addAuteur(resFinal,coll)' >add to collection</button>\</td>");
                     tr.append(td);
                     $("#table").append(tr);
                 }
@@ -78,7 +90,7 @@ $(document).ready(function() {
     $('#submit-id').click(auteur);
 });
 
-function addAlbum(album,to){
+function addAuteur(auteur,to){
     var url = "http://localhost:8080/utilisateur/addAuteurTo";
     if(to=='favoris'){
         url = url+"Favoris";
@@ -91,10 +103,10 @@ function addAlbum(album,to){
     myHeaders.append("Content-Type", "application/json");
 
     var body = JSON.stringify({
-        "nom":album["nom"],
-        "prenom":album["prenom"],
-        "serie":album["serie"],
-        "album":album["album"],
+        "nom":auteur["nom"],
+        "prenom":auteur["prenom"],
+        "serie":auteur["serie"],
+        "album":auteur["album"],
     });
 
     fetch(url, {

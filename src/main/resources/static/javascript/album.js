@@ -1,4 +1,5 @@
-
+let incrIDbutton = 0;
+let globalTab = [];
 let resFinal;
 const fav = "favoris";
 const suiv = "suivis";
@@ -51,14 +52,26 @@ $(document).ready(function() {
                         td = $("<td>auteur</td>").text(result["auteurs"]);
                         tr.append(td);
                         resFinal = result;
+                        globalTab.push(result);
+                        globalTab.push(result);
+                        globalTab.push(result);
 
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)'>add to favoris</button>\</td>");
+                        var ids = incrIDbutton.toString();
+                        td = $("<td>\<button onclick='addAlbum(globalTab[this.id],fav)' >add to favoris</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)'>Suivre</button>\</td>");
+                        td = $("<td>\<button  onclick='addAlbum(globalTab[this.id],suiv)' >add to suivis</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)'>add to my collection</button>\</td>");
+                        td = $("<td>\<button onclick='addAlbum(globalTab[this.id],coll)' >add to collections</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        $("#table").append(tr)
+                        $("#table").append(tr);
+
+
                     })
                 } else {
                     var tr = $("<tr></tr>");
@@ -96,6 +109,7 @@ $(document).ready(function() {
 });
 
 function addAlbum(album,to){
+    console.log("album  :"+album["titre"]);
     var url = "http://localhost:8080/utilisateur/addAlbumTo";
     if(to=='favoris'){
         url = url+"Favoris";

@@ -1,15 +1,19 @@
 let resFinal;
+let incrIDbutton = 0;
+let globalTab = [];
 const fav = "favoris";
 const suiv = "suivis";
 const coll = "collections";
 $(document).ready(function() {
+
+
     function serie(){
 
         var res = document.getElementById("serie-select").value;
         var search = document.getElementById("serie-search").value;
         var url = "http://localhost:8080/serie/";
         //var url ="https://bande-de-hoey.oups.net/serie/";
-        
+        console.log(url);
 
         if(res == "title"){
             url = url+"byTitle?title="+search;
@@ -51,17 +55,28 @@ $(document).ready(function() {
                         tr.append(td);
                         td = $("<td>type</td>").text(result["type"]);
                         tr.append(td);
+
                         resFinal = result;
-                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,fav)' >add to favoris</button>\</td>");
+                        globalTab.push(result);
+                        globalTab.push(result);
+                        globalTab.push(result);
+
+                        var ids = incrIDbutton.toString();
+                        td = $("<td>\<button onclick='addSerie(globalTab[this.id],fav)' >add to favoris</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,suiv)' >add to suivis</button>\</td>");
+                        td = $("<td>\<button  onclick='addSerie(globalTab[this.id],suiv)' >add to suivis</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,coll)' >add to collections</button>\</td>");
+                        td = $("<td>\<button onclick='addSerie(globalTab[this.id],coll)' >add to collections</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
                         $("#table").append(tr);
                     })
                 }else{
-                    console.log(result);
                     var tr = $("<tr></tr>");
 
                     var td = $("<td>titre</td>").text(result["titre"]);
@@ -96,6 +111,7 @@ $(document).ready(function() {
 });
 
 function addSerie(serie,to){
+
     var url = "http://localhost:8080/utilisateur/addSerieTo";
     if(to=='favoris'){
         url = url+"Favoris";

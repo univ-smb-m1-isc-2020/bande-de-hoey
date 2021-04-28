@@ -74,6 +74,7 @@ public class UtilisateurService {
     }
 
     public Utilisateur getConnectedUser(){
+        System.out.println(Utilisateur.getConnectedUser().toString());
         return Utilisateur.getConnectedUser();
     }
 
