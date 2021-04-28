@@ -180,6 +180,11 @@ public class Scraping {
                             titre = ((((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split("\\[|\\/"))[0];
                             if(titre.length()>1){
                                 titre = titre.substring(0, titre.length() - 1);
+                                titre = titre.replaceAll("\\*","");
+                                titre = titre.replaceAll("\\+","");
+                                titre = titre.replaceAll("-","");
+                                titre = titre.replaceAll("/","");
+                                titre = titre.replaceAll("\\^","");
                             }else{
                                 titre = "";
                             }
