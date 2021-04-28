@@ -78,8 +78,11 @@ public class GestionBdApplication implements CommandLineRunner{
 			if(temp.get(5)=="" || temp.get(5)==null){
 				listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), -1));
 			}else{
-				System.out.println(temp.get(5));
-				listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), Integer.parseInt(temp.get(5).replaceAll("\\s+","")) ));
+				try {
+					listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), Integer.parseInt(temp.get(5).replaceAll("\\s+","")) ));
+				} catch (final NumberFormatException e) {
+					listAlbum.add(new Album(temp.get(0), temp.get(1), temp.get(2), temp.get(3), temp.get(4), -1));
+				}
 			}
 			if(temp.get(6) != ""){
 				fooAuteur = temp.get(6).split("\\|");
