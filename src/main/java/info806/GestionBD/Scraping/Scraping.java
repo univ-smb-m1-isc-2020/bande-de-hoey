@@ -48,8 +48,8 @@ public class Scraping {
         ArrayList<ArrayList<String>> listData = new ArrayList<ArrayList<String>>();
         //SEARCH
         OkHttpClient client = new OkHttpClient().newBuilder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
@@ -70,6 +70,9 @@ public class Scraping {
 
         //NOTICE
         OkHttpClient noticeClient = new OkHttpClient().newBuilder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
                 .build();
         Request noticeRequest = new Request.Builder()
                 .url("https://catalogue.bm-lyon.fr/in/rest/api/notice?id=p::usmarcdef_0000389350")
@@ -80,6 +83,9 @@ public class Scraping {
 
         // Image
         OkHttpClient imageClient = new OkHttpClient().newBuilder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
                 .build();
         Request imageRequest = new Request.Builder()
                 .url("https://catalogue.bm-lyon.fr/in/rest/Thumb/image?id=p%3A%3Ausmarcdef_0000389350&isbn=9782205006933&author=Morris%2C+%281923-2001%29&title=Le+grand+duc+%2F+%5BLivre%5D+%2F+dessins+de+Morris+%3B+sc%C3%A9nario+de+Goscinny&year=1999&publisher=Dargaud&TypeOfDocument=LyonPhysicalDocument&mat=bande_dessinees&ct=true&size=512&isPhysical=1")
