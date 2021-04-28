@@ -5,6 +5,7 @@ const coll = "collections";
 $(document).ready(function() {
 
     let incrIDbutton = 0;
+    let globalTab = [];
 
     function serie(){
 
@@ -56,6 +57,7 @@ $(document).ready(function() {
                         td = $("<td>type</td>").text(result["type"]);
                         tr.append(td);
                         resFinal = result;
+                        globalTab.push(result);
                         td = $("<td>\<button onclick='addSerie(resFinal,fav)' >add to favoris</button>\</td>");
                         td.attr('id', 'but-test' + incrIDbutton);
                         incrIDbutton+=1;
@@ -70,6 +72,7 @@ $(document).ready(function() {
                         tr.append(td);
                         $("#table").append(tr);
                     })
+                    console.log(globalTab);
                 }else{
                     console.log(result);
                     var tr = $("<tr></tr>");
