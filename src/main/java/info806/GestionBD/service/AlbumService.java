@@ -32,7 +32,19 @@ public class AlbumService {
     }
     //public AlbumService(){}
     public List<Album> getAllAlbums(){
-        return albumRepository.findAll();
+        var l = albumRepository.findAll();
+        List<Album> res = new ArrayList<>();
+        res.add(l.get(0));
+        for(var i:l){
+            boolean canAdd = true;
+            for(var j:res){
+                if(i.getTitre().matches(j.getTitre()) ){
+                    canAdd = false;
+                }
+            }
+            if(canAdd) res.add(i);
+        }
+        return res;
     }
 
     public Album getById(Long id){

@@ -3,7 +3,6 @@ const fav = "favoris";
 const suiv = "suivis";
 const coll = "collections";
 $(document).ready(function() {
-    function getAll(){
         var url = "http://localhost:8080/utilisateur/connectedUser";
         //var url ="https://bande-de-hoey.oups.net/utilisateur/connectedUser";
         fetch(url, {
@@ -197,9 +196,6 @@ $(document).ready(function() {
 
             })
             .catch(error => console.log('error', error));
-    }
-
-    $('#submit-id').click(getAll);
 
 });
 

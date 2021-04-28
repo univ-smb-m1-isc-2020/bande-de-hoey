@@ -9,7 +9,7 @@ $(document).ready(function() {
         var search = document.getElementById("serie-search").value;
         var url = "http://localhost:8080/serie/";
         //var url ="https://bande-de-hoey.oups.net/serie/";
-        
+        console.log(url);
 
         if(res == "title"){
             url = url+"byTitle?title="+search;
@@ -34,6 +34,7 @@ $(document).ready(function() {
             .then(response => response.json())
             .then(result => {
                 if(res != "title"){
+                    console.log("hoey :" +result);
                     result.forEach(result => {
                         var tr = $("<tr></tr>");
 

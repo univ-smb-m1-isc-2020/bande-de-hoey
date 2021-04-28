@@ -59,6 +59,8 @@ $(document).ready(function() {
                         td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)'>add to my collection</button>\</td>");
                         tr.append(td);
                         $("#table").append(tr)
+
+
                     })
                 } else {
                     var tr = $("<tr></tr>");
@@ -96,6 +98,7 @@ $(document).ready(function() {
 });
 
 function addAlbum(album,to){
+    console.log("album  :"+album["titre"]);
     var url = "http://localhost:8080/utilisateur/addAlbumTo";
     if(to=='favoris'){
         url = url+"Favoris";
