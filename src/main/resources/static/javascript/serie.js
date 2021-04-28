@@ -65,19 +65,19 @@ $(document).ready(function() {
                     console.log(result);
                     var tr = $("<tr></tr>");
 
-                    var td = $("<td>titre</td>").text(result["titre"]);
+                    var td = $("<td class='titre'>titre</td>").text(result["titre"]);
                     tr.append(td);
-                    td = $("<td>Etat</td>").text(result["etat"]);
+                    td = $("<td class='etat'>Etat</td>").text(result["etat"]);
                     tr.append(td);
-                    td = $("<td>albums</td>").text(result["albumes"]);
+                    td = $("<td class='albumes'>albums</td>").text(result["albumes"]);
                     tr.append(td);
-                    td = $("<td>auteurs</td>").text(result["auteurs"]);
+                    td = $("<td class='auteurs'>auteurs</td>").text(result["auteurs"]);
                     tr.append(td);
-                    td = $("<td>nb albums</td>").text(result["nbAlbum"]);
+                    td = $("<td class='nbAlbum'>nb albums</td>").text(result["nbAlbum"]);
                     tr.append(td);
-                    td = $("<td>format</td>").text(result["format"]);
+                    td = $("<td class='format'>format</td>").text(result["format"]);
                     tr.append(td);
-                    td = $("<td>type</td>").text(result["type"]);
+                    td = $("<td class='type'>type</td>").text(result["type"]);
                     tr.append(td);
                     resFinal = result;
                     td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,fav)' >add to favoris</button>\</td>");
@@ -97,6 +97,14 @@ $(document).ready(function() {
 });
 
 function addSerie(serie,to){
+    var data = [7];
+    data[0] = $(this).parent().find('.titre').text();
+    data[1] = $(this).parent().find('.etat').text();
+    data[2] = $(this).parent().find('.albumes').text();
+    data[3] = $(this).parent().find('.auteurs').text();
+    data[4] = $(this).parent().find('.nbAlbum').text();
+    data[5] = $(this).parent().find('.format').text();
+    data[6] = $(this).parent().find('.type').text();
     var url = "http://localhost:8080/utilisateur/addSerieTo";
     if(to=='favoris'){
         url = url+"Favoris";
@@ -110,11 +118,11 @@ function addSerie(serie,to){
     myHeaders.append("Content-Type", "application/json");
 
     var body = JSON.stringify({
-        "etat":serie["etat"],
-        "titre":serie["titre"],
-        "type":serie["type"],
-        "nbAlbum":serie["nbAlbum"],
-        "format":serie["format"],
+        "etat":data[1],
+        "titre":data[0],
+        "type":data[6],
+        "nbAlbum":data[4],
+        "format":data[5],
     });
 
     fetch(url, {
