@@ -14,8 +14,7 @@ function connexion(){
     })
         .then(response => response.text())
         .then(result => {
-            console.log(result);
-            if(result){
+            if(result == "true"){
                 window.location.replace("http://localhost:63342/gestion-bd/templates/home.html");
             }else{
                 alert("this account doesn't exist, try to change the mail or the password")

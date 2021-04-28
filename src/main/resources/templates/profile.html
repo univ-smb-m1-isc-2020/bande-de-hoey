@@ -28,7 +28,7 @@
 <div class="d-flex justify-content-around w-100">
     <button type="button" class="btn btn-secondary rounded-circle">deconnexion</button>
 
-    <button type="button" class="btn btn-danger">supprimer compte</button>
+    <button type="button" id="submit-id" class="btn btn-danger">supprimer compte</button>
 </div>
 
 <div class="d-flex justify-content-around vw-100 vh-100">
@@ -64,8 +64,21 @@
                 </div>
 
                 <div id="collapseAlbumFavoris" class="collapse" aria-labelledby="headingAlbumFavoris" data-parent="#accordionFavoris">
-                    <div id="resFavorisAlbum" class="card-body">
-                        favoris album
+                    <div  class="card-body">
+                        <table >
+                            <tbody id="resFavorisAlbum">
+                            <tr>
+                                <th>titre</th>
+                                <th>serie</th>
+                                <th>format</th>
+                                <th>type</th>
+                                <th>format</th>
+                                <th>ordre</th>
+                                <th>image</th>
+                                <th>auteurs</th>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -80,8 +93,20 @@
                 </div>
 
                 <div id="collapseSerieFavoris" class="collapse" aria-labelledby="headingSerieFavoris" data-parent="#accordionFavoris">
-                    <div id="resFavorisSerie" class="card-body">
-                        favoris serie
+                    <div  class="card-body">
+                        <table >
+                            <tbody id="resFavorisSerie">
+                            <tr>
+                                <th>titre</th>
+                                <th>etat</th>
+                                <th>albums</th>
+                                <th>auteurs</th>
+                                <th>nb albums</th>
+                                <th>format</th>
+                                <th>type</th>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -96,8 +121,17 @@
                 </div>
 
                 <div id="collapseAuteurFavoris" class="collapse" aria-labelledby="headingAuteurFavoris" data-parent="#accordionFavoris">
-                    <div id="resFavorisAuteur" class="card-body">
-                        favoris auteur
+                    <div  class="card-body">
+                        <table >
+                            <tbody id="resFavorisAuteur">
+                            <tr>
+                                <th>nom</th>
+                                <th>prenom</th>
+                                <th>serie</th>
+                                <th>album</th>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -119,8 +153,20 @@
                 </div>
 
                 <div id="collapseAlbumSuivis" class="collapse" aria-labelledby="headingAlbumSuivis" data-parent="#accordionSuivis">
-                    <div id="resSuivisAlbum"  class="card-body">
-                        album suivis
+                    <div   class="card-body">
+                        <table >
+                            <tbody id="resSuivisAlbum">
+                            <tr>
+                                <th>titre</th>
+                                <th>etat</th>
+                                <th>albums</th>
+                                <th>auteurs</th>
+                                <th>nb albums</th>
+                                <th>format</th>
+                                <th>type</th>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -135,8 +181,20 @@
                 </div>
 
                 <div id="collapseSerieSuivis" class="collapse" aria-labelledby="headingSerieSuivis" data-parent="#accordionSuivis">
-                    <div id="resSuivisSerie" class="card-body">
-                        serie suivi
+                    <div  class="card-body">
+                        <table >
+                            <tbody id="resSuivisSerie">
+                            <tr>
+                                <th>titre</th>
+                                <th>etat</th>
+                                <th>albums</th>
+                                <th>auteurs</th>
+                                <th>nb albums</th>
+                                <th>format</th>
+                                <th>type</th>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -151,8 +209,17 @@
                 </div>
 
                 <div id="collapseAuteurSuivis" class="collapse" aria-labelledby="headingAuteurSuivis" data-parent="#accordionSuivis">
-                    <div id="resSuivisAuteur"  class="card-body">
-                        auteur suivis
+                    <div class="card-body">
+                        <table >
+                            <tbody id="resSuivisAuteur">
+                            <tr>
+                                <th>nom</th>
+                                <th>prenom</th>
+                                <th>serie</th>
+                                <th>album</th>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -174,8 +241,20 @@
                 </div>
 
                 <div id="collapseAlbumCollection" class="collapse" aria-labelledby="headingAlbumCollection" data-parent="#accordionCollection">
-                    <div id="resCollectionsAlbum" class="card-body">
-                        collection album
+                    <div  class="card-body">
+                        <table >
+                            <tbody id="resCollectionsAlbum">
+                            <tr>
+                                <th>titre</th>
+                                <th>etat</th>
+                                <th>albums</th>
+                                <th>auteurs</th>
+                                <th>nb albums</th>
+                                <th>format</th>
+                                <th>type</th>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -190,8 +269,20 @@
                 </div>
 
                 <div id="collapseSerieCollection" class="collapse" aria-labelledby="headingSerieCollection" data-parent="#accordionCollection">
-                    <div id="resCollectionsSerie" class="card-body">
-                        collection serie
+                    <div  class="card-body">
+                        <table >
+                            <tbody id="resCollectionsSerie">
+                            <tr>
+                                <th>titre</th>
+                                <th>etat</th>
+                                <th>albums</th>
+                                <th>auteurs</th>
+                                <th>nb albums</th>
+                                <th>format</th>
+                                <th>type</th>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -206,8 +297,17 @@
                 </div>
 
                 <div id="collapseAuteurCollection" class="collapse" aria-labelledby="headingAuteurCollection" data-parent="#accordionCollection">
-                    <div id="resCollectionsAuteur" class="card-body">
-                        collection auteur
+                    <div class="card-body">
+                        <table >
+                            <tbody id="resCollectionsAuteur" >
+                            <tr>
+                                <th>nom</th>
+                                <th>prenom</th>
+                                <th>serie</th>
+                                <th>album</th>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
