@@ -110,16 +110,17 @@ public class GestionBdApplication implements CommandLineRunner{
 				//listAlbum.get(listAlbum.size()-1).setSerie(new Serie("",temp.get(8),"",0,""));
 			}
 		}
+		System.out.println("size " + listAlbum.size());
 		auteurController.createListAuteur(listAuteur);
 		serieController.createListSerie(listSerie);
 		albumController.createListAlbum(listAlbum);
 
 
 		//create test
-		/*albumController.create();
+		albumController.create();
 		auteurController.create();
 		serieController.create();
-		utilisateurController.create();*/
+		utilisateurController.create();
 
 		//Add
 		/*var auteur = auteurController.getByName("clerc");

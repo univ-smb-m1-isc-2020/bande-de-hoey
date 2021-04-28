@@ -103,7 +103,7 @@ public class Scraping {
         String image = "";
 
 
-        for (int i = 1 ; i <= /*maxPage*/8 ; i++){
+        for (int i = 1 ; i <= /*maxPage*/650 ; i++){
             body = RequestBody.create(mediaType, "{\"includeFacets\":false,\"advancedQuery\":{\"limitClause\":\"ZMAT:\\\"bande_dessinees\\\" languageLimit_s:\\\"fre\\\"\",\"pageSize\":10,\"searchContext\":\"advancedsearch\",\"searchType\":\"all\",\"section\":\"*\",\"sort\":\"score\",\"terms\":[]},\"order\":\"score\",\"queryid\":\"fb33204c-acff-4451-98c0-2b5847179e5d\",\"sf\":\"*\",\"mappedFQ\":{},\"pageNo\":"+i+"\r\n,\"pageSize\":8,\"locale\":\"fr\"}");
             request = new Request.Builder()
                     .url("https://catalogue.bm-lyon.fr/in/rest/api/search")

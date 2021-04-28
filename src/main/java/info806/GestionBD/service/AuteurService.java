@@ -27,7 +27,7 @@ public class AuteurService {
         for(var i:l){
             boolean canAdd = true;
             for(var j:res){
-                if(i.getNom().matches(j.getNom()) && i.getPrenom().matches(j.getPrenom())){
+                if( (i.getNom().matches(j.getNom())) ){
                     canAdd = false;
                 }
             }
