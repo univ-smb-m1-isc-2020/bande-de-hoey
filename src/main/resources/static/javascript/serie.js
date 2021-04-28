@@ -38,7 +38,6 @@ $(document).ready(function() {
             .then(response => response.json())
             .then(result => {
                 if(res != "title"){
-                    console.log("hoey :" +result);
                     result.forEach(result => {
                         var tr = $("<tr></tr>");
 
@@ -63,26 +62,21 @@ $(document).ready(function() {
                         globalTab.push(result);
 
                         var ids = incrIDbutton.toString();
-                        td = $("<td>\<button onclick='addSerie(resFinal,fav,globalTab[incrIDbutton],this.id)' >add to favoris</button>\</td>");
-                        td.attr('id', incrIDbutton);
+                        td = $("<td>\<button onclick='addSerie(globalTab[this.id],fav)' >add to favoris</button>\</td>");
                         td.children().attr('id', incrIDbutton)
                         incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,suiv,globalTab[incrIDbutton],this.id)' >add to suivis</button>\</td>");
-                        td.attr('id', incrIDbutton);
+                        td = $("<td>\<button  onclick='addSerie(globalTab[this.id],suiv)' >add to suivis</button>\</td>");
                         td.children().attr('id', incrIDbutton)
                         incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test'  onclick='addSerie(resFinal,coll,globalTab[incrIDbutton],this.id)' >add to collections</button>\</td>");
-                        td.attr('id', incrIDbutton);
+                        td = $("<td>\<button onclick='addSerie(globalTab[this.id],coll)' >add to collections</button>\</td>");
                         td.children().attr('id', incrIDbutton)
                         incrIDbutton+=1;
                         tr.append(td);
                         $("#table").append(tr);
                     })
-                    console.log(globalTab);
                 }else{
-                    console.log(result);
                     var tr = $("<tr></tr>");
 
                     var td = $("<td>titre</td>").text(result["titre"]);
@@ -116,9 +110,7 @@ $(document).ready(function() {
 
 });
 
-function addSerie(serie,to,foo,but){
-    console.log( foo );
-    console.log( "but : " + but );
+function addSerie(serie,to){
 
     var url = "http://localhost:8080/utilisateur/addSerieTo";
     if(to=='favoris'){
