@@ -57,15 +57,15 @@ $(document).ready(function() {
                         globalTab.push(result);
 
                         var ids = incrIDbutton.toString();
-                        td = $("<td>\<button onclick='addSerie(globalTab[this.id],fav)' >add to favoris</button>\</td>");
+                        td = $("<td>\<button onclick='addAlbum(globalTab[this.id],fav)' >add to favoris</button>\</td>");
                         td.children().attr('id', incrIDbutton)
                         incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button  onclick='addSerie(globalTab[this.id],suiv)' >add to suivis</button>\</td>");
+                        td = $("<td>\<button  onclick='addAlbum(globalTab[this.id],suiv)' >add to suivis</button>\</td>");
                         td.children().attr('id', incrIDbutton)
                         incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button onclick='addSerie(globalTab[this.id],coll)' >add to collections</button>\</td>");
+                        td = $("<td>\<button onclick='addAlbum(globalTab[this.id],coll)' >add to collections</button>\</td>");
                         td.children().attr('id', incrIDbutton)
                         incrIDbutton+=1;
                         tr.append(td);
