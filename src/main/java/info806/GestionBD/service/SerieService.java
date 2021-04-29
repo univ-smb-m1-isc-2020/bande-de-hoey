@@ -22,7 +22,19 @@ public class SerieService {
     }
 
     public List<Serie> getAllSeries(){
-        return serieRepository.findAll();
+        var l = serieRepository.findAll();
+        List<Serie> res = new ArrayList<>();
+        res.add(l.get(0));
+        for(var i:l){
+            boolean canAdd = true;
+            for(var j:res){
+                if(i.getTitre().matches(j.getTitre())){
+                    canAdd = false;
+                }
+            }
+            if(canAdd) res.add(i);
+        }
+        return res;
     }
 
     public void create(ArrayList<Serie> listSerie) {

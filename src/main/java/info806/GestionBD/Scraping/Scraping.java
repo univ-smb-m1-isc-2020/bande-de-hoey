@@ -41,15 +41,15 @@ public class Scraping {
 
     public Scraping(){}
 
-    public static void main(String[] args) throws JSONException, IOException { Scraping scrap = new Scraping(); scrap.scraping(); }
+    //public static void main(String[] args) throws JSONException, IOException { Scraping scrap = new Scraping(); scrap.scraping(); }
 
     public  ArrayList<ArrayList<String>> scraping() throws JSONException, IOException{
         ArrayList<String> tempList = new ArrayList<String>();
         ArrayList<ArrayList<String>> listData = new ArrayList<ArrayList<String>>();
         //SEARCH
         OkHttpClient client = new OkHttpClient().newBuilder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
@@ -70,6 +70,9 @@ public class Scraping {
 
         //NOTICE
         OkHttpClient noticeClient = new OkHttpClient().newBuilder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
                 .build();
         Request noticeRequest = new Request.Builder()
                 .url("https://catalogue.bm-lyon.fr/in/rest/api/notice?id=p::usmarcdef_0000389350")
@@ -80,6 +83,9 @@ public class Scraping {
 
         // Image
         OkHttpClient imageClient = new OkHttpClient().newBuilder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
                 .build();
         Request imageRequest = new Request.Builder()
                 .url("https://catalogue.bm-lyon.fr/in/rest/Thumb/image?id=p%3A%3Ausmarcdef_0000389350&isbn=9782205006933&author=Morris%2C+%281923-2001%29&title=Le+grand+duc+%2F+%5BLivre%5D+%2F+dessins+de+Morris+%3B+sc%C3%A9nario+de+Goscinny&year=1999&publisher=Dargaud&TypeOfDocument=LyonPhysicalDocument&mat=bande_dessinees&ct=true&size=512&isPhysical=1")
@@ -103,7 +109,7 @@ public class Scraping {
         String image = "";
 
 
-        for (int i = 1 ; i <= /*maxPage*/8 ; i++){
+        for (int i = 1 ; i <= /*maxPage*/650 ; i++){
             body = RequestBody.create(mediaType, "{\"includeFacets\":false,\"advancedQuery\":{\"limitClause\":\"ZMAT:\\\"bande_dessinees\\\" languageLimit_s:\\\"fre\\\"\",\"pageSize\":10,\"searchContext\":\"advancedsearch\",\"searchType\":\"all\",\"section\":\"*\",\"sort\":\"score\",\"terms\":[]},\"order\":\"score\",\"queryid\":\"fb33204c-acff-4451-98c0-2b5847179e5d\",\"sf\":\"*\",\"mappedFQ\":{},\"pageNo\":"+i+"\r\n,\"pageSize\":8,\"locale\":\"fr\"}");
             request = new Request.Builder()
                     .url("https://catalogue.bm-lyon.fr/in/rest/api/search")
@@ -172,7 +178,24 @@ public class Scraping {
                             break;
                         case "title":
                             titre = ((((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split("\\[|\\/"))[0];
-                            titre = titre.substring(0, titre.length() - 1);
+                            if(titre.length()>1){
+                                titre = titre.substring(0, titre.length() - 1);
+                                if(titre.indexOf("*") > 0){
+                                    System.out.println("--------------------------------------------"+titre+"--------------------------------------------");
+                                    titre = titre.replaceAll("\\*","");
+                                    System.out.println("--------------------------------------------"+titre+"--------------------------------------------");
+                                }
+                                titre = titre.replaceAll("\\*","");
+                                if(titre.indexOf("\\*") > 1){
+                                    System.out.println("--------------------------------------------"+titre+"--------------------------------------------");
+                                }
+                                titre = titre.replaceAll("\\+","");
+                                titre = titre.replaceAll("-","");
+                                titre = titre.replaceAll("/","");
+                                titre = titre.replaceAll("\\^","");
+                            }else{
+                                titre = "";
+                            }
                             break;
                         case "creatorOther":
                             foo = (((JSONObject)(o.getJSONArray("values")).get(0)).getJSONObject("qa")).getString("Answer").split(",");

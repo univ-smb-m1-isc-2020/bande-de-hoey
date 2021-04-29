@@ -32,6 +32,11 @@ public class UtilisateurController {
         return utilisateurService.getAllUsers();
     }
 
+    @GetMapping(path = "allTest")
+    public List<Utilisateur> getAllUsersTest(){
+        return utilisateurService.getAllUsersTest();
+    }
+
     @GetMapping(path = "byName")
     public List<Utilisateur> getByName(@RequestBody String name){
         return utilisateurService.getByName(name);
@@ -72,14 +77,13 @@ public class UtilisateurController {
 
 //    @PostMapping(path = "inscription")
     @RequestMapping(method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE, path = "inscription")
-    public void inscreption(@RequestBody Utilisateur user){
-        utilisateurService.inscreption(user);
+    public String inscreption(@RequestBody Utilisateur user){
+        return utilisateurService.inscreption(user);
     }
 
     @DeleteMapping(path = "delete")
-    public void delete(@RequestBody Utilisateur user){
-        System.out.println(user.toString());
-        utilisateurService.delete(user);
+    public String delete(){
+        return utilisateurService.delete( Utilisateur.getConnectedUser());
     }
 
     //Serie

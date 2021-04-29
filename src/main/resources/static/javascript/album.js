@@ -1,4 +1,5 @@
-
+let incrIDbutton = 0;
+let globalTab = [];
 let resFinal;
 const fav = "favoris";
 const suiv = "suivis";
@@ -38,27 +39,48 @@ $(document).ready(function() {
                         tr.append(td);
                         td = $("<td>Serie</td>").text(result["serie"]);
                         tr.append(td);
-                        td = $("<td>format</td>").text(result["format"]);
+                        td = $("<td>format</td>").text("BD");
                         tr.append(td);
                         td = $("<td>type</td>").text(result["type"]);
                         tr.append(td);
                         td = $("<td>isbn</td>").text(result["isbn"]);
                         tr.append(td);
-                        td = $("<td>ordre</td>").text(result["ordre"]);
+                        if(result["ordre"] != -1){
+                            td = $("<td>ordre</td>").text(result["ordre"]);
+                            tr.append(td);
+                        }else {
+                            td = $("<td>ordre</td>").text("");
+                            tr.append(td);
+                        }
+                        td = $('<img />', {src : result["image"] +'.png', width: "50"});
                         tr.append(td);
-                        td = $("<td>image</td>").text(result["image"]);
-                        tr.append(td);
-                        td = $("<td>auteur</td>").text(result["auteurs"]);
+                        let textAuteur = "";
+                        result["auteurs"].forEach( e =>{
+                            textAuteur += e.nom + " " + e.prenom + ", ";
+                        });
+                        td = $("<td style='text-align: center'>auteur</td>").text(textAuteur);
                         tr.append(td);
                         resFinal = result;
+                        globalTab.push(result);
+                        globalTab.push(result);
+                        globalTab.push(result);
 
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,fav)'>add to favoris</button>\</td>");
+                        var ids = incrIDbutton.toString();
+                        td = $("<td>\<button onclick='addAlbum(globalTab[this.id],fav)' >add to favoris</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,suiv)'>Suivre</button>\</td>");
+                        td = $("<td>\<button  onclick='addAlbum(globalTab[this.id],suiv)' >add to suivis</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        td = $("<td>\<button id='but-test' onclick='addAlbum(resFinal,coll)'>add to my collection</button>\</td>");
+                        td = $("<td>\<button onclick='addAlbum(globalTab[this.id],coll)' >add to collections</button>\</td>");
+                        td.children().attr('id', incrIDbutton)
+                        incrIDbutton+=1;
                         tr.append(td);
-                        $("#table").append(tr)
+                        $("#table").append(tr);
+
+
                     })
                 } else {
                     var tr = $("<tr></tr>");
@@ -75,9 +97,13 @@ $(document).ready(function() {
                     tr.append(td);
                     td = $("<td>ordre</td>").text(result["ordre"]);
                     tr.append(td);
-                    td = $("<td>image</td>").text(result["image"]);
+                    td = $('<img />', {src : result["image"] +'.png', width: "50"});
                     tr.append(td);
-                    td = $("<td>auteur</td>").text(result["auteurs"]);
+                    let textAuteur = "";
+                    result["auteurs"].forEach( e =>{
+                        textAuteur += e.nom + " " + e.prenom + "\n";
+                    });
+                    td = $("<td style='text-align: center'>auteur</td>").text(textAuteur);
                     tr.append(td);
                     resFinal = result;
 
@@ -96,6 +122,7 @@ $(document).ready(function() {
 });
 
 function addAlbum(album,to){
+    console.log("album  :"+album["titre"]);
     var url = "http://localhost:8080/utilisateur/addAlbumTo";
     if(to=='favoris'){
         url = url+"Favoris";
