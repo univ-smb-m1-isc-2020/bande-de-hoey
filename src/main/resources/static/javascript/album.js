@@ -47,8 +47,12 @@ $(document).ready(function() {
                         tr.append(td);
                         td = $("<td>ordre</td>").text(result["ordre"]);
                         tr.append(td);
-                        td = $('<img />', {src : result["image"] +'.png'});
+                        td = $('<img />', {src : result["image"] +'.png'}, {width : "500"});
                         tr.append(td);
+                        result["auteurs"].forEach( e =>{
+                            td = $("<td>auteur</td>").text(e.nom);
+                            tr.append(td);
+                        });
                         td = $("<td>auteur</td>").text(result["auteurs"]);
                         tr.append(td);
                         resFinal = result;
