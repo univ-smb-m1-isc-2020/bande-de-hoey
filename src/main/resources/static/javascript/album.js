@@ -47,7 +47,7 @@ $(document).ready(function() {
                         tr.append(td);
                         td = $("<td>ordre</td>").text(result["ordre"]);
                         tr.append(td);
-                        td = $("<td>image</td>").text(result["image"]);
+                        td = $('<img />', {src : result["image"] +'.png'});
                         tr.append(td);
                         td = $("<td>auteur</td>").text(result["auteurs"]);
                         tr.append(td);
