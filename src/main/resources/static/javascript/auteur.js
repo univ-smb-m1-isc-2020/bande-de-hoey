@@ -11,7 +11,7 @@ $(document).ready(function() {
         var search = document.getElementById("id-search").value;
         var url =" http://localhost:8080/auteur/";
         //var url ="https://bande-de-hoey.oups.net/auteur/";
-
+        console.log(url);
         if(res == "name"){
             url = url+"byName?name="+search;
         }else if(res == "serie"){
@@ -31,16 +31,15 @@ $(document).ready(function() {
             .then(result => {
                 if(res == "all"){
                     result.forEach(result => {
-                        console.log(result);
                         var tr = $("<tr></tr>");
 
-                        var td = $("<td>Titre</td>").text(result["nom"]);
+                        var td = $("<td style='text-align: center'>Nom</td>").text( result["nom"]);
                         tr.append(td);
-                        td = $("<td>Serie</td>").text(result["prenom"]);
+                        td = $("<td style='text-align: center'>Prenom</td>").text(result["prenom"]);
                         tr.append(td);
-                        td = $("<td>format</td>").text(result["series"]);
+                        td = $("<td style='text-align: center'>Series</td>").text(result["series"]);
                         tr.append(td);
-                        td = $("<td>type</td>").text(result["albums"]);
+                        td = $("<td style='text-align: center'>Albumes</td>").text(result["albums"]);
                         tr.append(td);
 
                         resFinal = result;
@@ -63,16 +62,15 @@ $(document).ready(function() {
                         $("#table").append(tr);
                     })
                 }else {
-                    console.log(result);
                     var tr = $("<tr></tr>");
 
-                    var td = $("<td>Titre</td>").text(result["nom"]);
+                    var td = $("<td style='text-align: center' >nom</td>").text(result["nom"]);
                     tr.append(td);
-                    td = $("<td>Serie</td>").text(result["prenom"]);
+                    td = $("<td style='text-align: center'>prenom</td>").text(result["prenom"]);
                     tr.append(td);
-                    td = $("<td>format</td>").text(result["series"]);
+                    td = $("<td style='text-align: center'>series</td>").text(result["series"]);
                     tr.append(td);
-                    td = $("<td>type</td>").text(result["albums"]);
+                    td = $("<td style='text-align: center'>albums</td>").text(result["albums"]);
                     tr.append(td);
                     resFinal = result;
                     td = $("<td>\<button id='but-test' onclick='addAuteur(resFinal,fav)' >add to favoris</button>\</td>");

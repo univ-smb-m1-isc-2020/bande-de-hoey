@@ -39,21 +39,26 @@ $(document).ready(function() {
                         tr.append(td);
                         td = $("<td>Serie</td>").text(result["serie"]);
                         tr.append(td);
-                        td = $("<td>format</td>").text(result["format"]);
+                        td = $("<td>format</td>").text("BD");
                         tr.append(td);
                         td = $("<td>type</td>").text(result["type"]);
                         tr.append(td);
                         td = $("<td>isbn</td>").text(result["isbn"]);
                         tr.append(td);
-                        td = $("<td>ordre</td>").text(result["ordre"]);
+                        if(result["ordre"] != -1){
+                            td = $("<td>ordre</td>").text(result["ordre"]);
+                            tr.append(td);
+                        }else {
+                            td = $("<td>ordre</td>").text("");
+                            tr.append(td);
+                        }
+                        td = $('<img />', {src : result["image"] +'.png', width: "50"});
                         tr.append(td);
-                        td = $('<img />', {src : result["image"] +'.png'}, {width : "50"});
-                        tr.append(td);
-                        let textAuteur;
+                        let textAuteur = "";
                         result["auteurs"].forEach( e =>{
-                            textAuteur += e.nom + " " + e.prenom + "\n";
+                            textAuteur += e.nom + " " + e.prenom + ", ";
                         });
-                        td = $("<td>auteur</td>").text(textAuteur);
+                        td = $("<td style='text-align: center'>auteur</td>").text(textAuteur);
                         tr.append(td);
                         resFinal = result;
                         globalTab.push(result);
@@ -92,9 +97,13 @@ $(document).ready(function() {
                     tr.append(td);
                     td = $("<td>ordre</td>").text(result["ordre"]);
                     tr.append(td);
-                    td = $("<td>image</td>").text(result["image"]);
+                    td = $('<img />', {src : result["image"] +'.png', width: "50"});
                     tr.append(td);
-                    td = $("<td>auteur</td>").text(result["auteurs"]);
+                    let textAuteur = "";
+                    result["auteurs"].forEach( e =>{
+                        textAuteur += e.nom + " " + e.prenom + "\n";
+                    });
+                    td = $("<td style='text-align: center'>auteur</td>").text(textAuteur);
                     tr.append(td);
                     resFinal = result;
 

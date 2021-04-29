@@ -41,7 +41,7 @@ $(document).ready(function() {
                     result.forEach(result => {
                         var tr = $("<tr></tr>");
 
-                        var td = $("<td>titre</td>").text(result["titre"]);
+                        var td = $("<td style='text-align: center'>titre</td>").text(result["titre"]);
                         tr.append(td);
                         td = $("<td>Etat</td>").text(result["etat"]);
                         tr.append(td);
@@ -79,7 +79,7 @@ $(document).ready(function() {
                 }else{
                     var tr = $("<tr></tr>");
 
-                    var td = $("<td>titre</td>").text(result["titre"]);
+                    var td = $("<td style='text-align: center'>titre</td>").text(result["titre"]);
                     tr.append(td);
                     td = $("<td>Etat</td>").text(result["etat"]);
                     tr.append(td);
