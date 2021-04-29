@@ -47,13 +47,13 @@ $(document).ready(function() {
                         tr.append(td);
                         td = $("<td>ordre</td>").text(result["ordre"]);
                         tr.append(td);
-                        td = $('<img />', {src : result["image"] +'.png'}, {width : "500"});
+                        td = $('<img />', {src : result["image"] +'.png'}, {width : "50"});
                         tr.append(td);
+                        let textAuteur;
                         result["auteurs"].forEach( e =>{
-                            td = $("<td>auteur</td>").text(e.nom);
-                            tr.append(td);
+                            textAuteur += e.nom + " " + e.prenom + "\n";
                         });
-                        td = $("<td>auteur</td>").text(result["auteurs"]);
+                        td = $("<td>auteur</td>").text(textAuteur);
                         tr.append(td);
                         resFinal = result;
                         globalTab.push(result);
