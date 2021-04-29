@@ -59,8 +59,14 @@ public class UtilisateurService {
         return null;
     }
 
-    public void inscreption(Utilisateur user) {
-        utilisateurRepository.save(user);
+    public String inscreption(Utilisateur user) {
+        try{
+            utilisateurRepository.save(user);
+            return "true";
+        }catch (Exception e){
+            return e.toString();
+        }
+
     }
 
     public boolean login(String mail, String mdp) {
@@ -78,11 +84,13 @@ public class UtilisateurService {
         return Utilisateur.getConnectedUser();
     }
 
-    public void delete(Utilisateur user){
+    public String delete(Utilisateur user){
         try{
             utilisateurRepository.delete(user);
+            return "true";
         }catch (Exception e){
             System.out.println("Exception : "+e);
+            return e.toString();
         }
     }
 
@@ -195,5 +203,9 @@ public class UtilisateurService {
         Utilisateur.getConnectedUser().getCollections().setNbSeries(nb);
         utilisateurRepository.save(Utilisateur.getConnectedUser());
 
+    }
+
+    public List<Utilisateur> getAllUsersTest() {
+        return utilisateurRepository.findAll();
     }
 }

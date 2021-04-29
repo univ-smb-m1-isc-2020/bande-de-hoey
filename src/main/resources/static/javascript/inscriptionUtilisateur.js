@@ -53,7 +53,14 @@ function sendValueToJava() {
             redirect: 'follow',
         })
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => {
+                console.log(result);
+                if(result == "true"){
+                    window.location.replace("http://localhost:63342/gestion-bd/templates/login/connexion.html");
+                }else{
+                    alert(result);
+                }
+            })
             .catch(error => console.log('error', error));
     }
 
